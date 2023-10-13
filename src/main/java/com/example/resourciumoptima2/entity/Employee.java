@@ -18,6 +18,14 @@ public class Employee {
     private String position;
     private Date recDate;
 
+    public Employee() {
+    }
+    public Employee(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+
     public String getEmail() {
         return email;
     }
@@ -80,5 +88,19 @@ public class Employee {
 
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", position='" + position + '\'' +
+                ", recDate=" + recDate +
+                '}';
     }
 }

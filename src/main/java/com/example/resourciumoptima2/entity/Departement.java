@@ -2,6 +2,8 @@ package com.example.resourciumoptima2.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "departement")
@@ -13,8 +15,8 @@ public class Departement {
     private String name;
     private String description;
 
-    @ManyToOne
-    private Employee employee;
+    @OneToMany
+    private List<Employee> employees;
     public int getId() {
         return id;
     }
@@ -34,11 +36,11 @@ public class Departement {
         this.description = description;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public List<Employee> getEmployees() {
+        return employees;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }
