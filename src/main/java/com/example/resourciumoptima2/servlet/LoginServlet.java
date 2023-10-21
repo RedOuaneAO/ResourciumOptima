@@ -13,9 +13,9 @@ import java.util.List;
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
-
+    private EmployeeService employeeService ;
     public  void init(){
-
+         employeeService  =new EmployeeService();
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

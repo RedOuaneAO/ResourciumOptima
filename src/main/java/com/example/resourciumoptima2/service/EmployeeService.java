@@ -10,5 +10,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class EmployeeService {
+    private final EmployeeRepo employeeRepo;
+    private final EntityManagerFactory entityManagerFactory;
+
+    public EmployeeService() {
+        this.entityManagerFactory = Persistence.createEntityManagerFactory("default");
+        this.employeeRepo = new EmployeeRepo(entityManagerFactory);
+    }
+//    add Employee
+    public void addEmlpoyee(Employee employee) {
+        employeeRepo.saveEmployee(employee);
+    }
 
 }
