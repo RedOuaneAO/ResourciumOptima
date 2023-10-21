@@ -182,7 +182,41 @@
                     <h6 class="m-0 font-weight-bold text-primary">Employees</h6>
                   </div>
 <%--                Card Body ----%>
-
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-striped border">
+                        <thead class="bg-secondary bg-opacity-25">
+                      <tr>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                      </thead>
+                        <tbody>
+                            <% if (request.getAttribute("result") != null) {
+                                List<Employee> employeeList = (List<Employee>) request.getAttribute("result");
+                                for (Employee emp:employeeList) {%>
+                                <tr>
+                                    <td><p><%= emp.getUserName() %></p></td>
+                                    <td><p><%= emp.getEmail() %></p></td>
+                                    <td><p><%= emp.getFirstName() %></p></td>
+                                    <td><p><%= emp.getLastName() %></p></td>
+                                    <td>
+                                        <form action="EmployeesServlet" method="post">
+                                            <input type="text" value="<%=emp.getId()%>" name="userId" hidden>
+                                            <button type="submit" class="bg-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <%} } %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
 <%--              Pie Chart ----%>
               <div class="col-xl-4">

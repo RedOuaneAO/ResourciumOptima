@@ -29,7 +29,24 @@ public class EmployeeRepo {
         }
     }
 
-
+    public List<Employee> getAllEmployees() {
+        EntityManager entityManager =entityManagerFactory.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("select e from Employee e ", Employee.class);
+            List<Employee> employees = query.getResultList();
+            entityManager.getTransaction().commit();
+            return employees;
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+        return null;
+    }
 
     public Object auth(Employee employee) {
         String userName = employee.getUserName();

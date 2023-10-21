@@ -12,10 +12,13 @@ import java.util.List;
 
 @WebServlet(name = "EmployeesServlet", value = "/EmployeesServlet")
 public class EmployeesServlet extends HttpServlet {
-
+    private EmployeeService employeeService= new EmployeeService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        List<Employee> employeeList = employeeService.getEmployees();
+        request.setAttribute("result", employeeList);
+        RequestDispatcher requestDispatcher= request.getRequestDispatcher("employeesView.jsp");
+        requestDispatcher.forward(request,response);
         }
 
     @Override

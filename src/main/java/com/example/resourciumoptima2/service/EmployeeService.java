@@ -25,5 +25,11 @@ public class EmployeeService {
     public Object userLogin(Employee employee){
       return employeeRepo.auth(employee);
     }
+//    get All Employees
+    public List<Employee> getEmployees(){
+        List<Employee> employeeList=employeeRepo.getAllEmployees();
+        return employeeList;
+    }
+
 
 }
