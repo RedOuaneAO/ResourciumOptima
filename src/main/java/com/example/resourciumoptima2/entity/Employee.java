@@ -20,11 +20,19 @@ public class Employee {
 
     public Employee() {
     }
-    public Employee(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Employee(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
     }
 
+    public Employee(String firstName, String lastName, String userName, String email, String password , String position) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.position = position;
+    }
 
     public String getEmail() {
         return email;

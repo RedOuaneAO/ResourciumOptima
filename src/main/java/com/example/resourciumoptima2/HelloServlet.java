@@ -1,51 +1,33 @@
 package com.example.resourciumoptima2;
 
 import java.io.*;
-
+import java.time.*;
 
 import com.example.resourciumoptima2.entity.Employee;
+import com.example.resourciumoptima2.service.EmployeeService;
 import jakarta.persistence.*;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet(name = "helloServlet", value = "/hello-servlet" ,loadOnStartup = 1)
+@WebServlet(name = "helloServlet", value = "" ,loadOnStartup = 1)
 public class HelloServlet extends HttpServlet {
-    private String message;
-      private   EntityManagerFactory entityManagerFactory = null;
-      private  EntityManager entityManager = null;
+//    private String message;
+
     public void init() {
-
-
-            entityManagerFactory = Persistence.createEntityManagerFactory("default");
-            entityManager = entityManagerFactory.createEntityManager();
-
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
+        EntityManager entityManager =entityManagerFactory.createEntityManager();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1>" + message + "</h1>");
-        out.println("</body></html>");
+        response.sendRedirect("index.jsp");
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-                String fName = req.getParameter("fName");
-                String sName = req.getParameter("sName");
-                Employee employee= new Employee();
-                employee.setFirstName(fName);
-                employee.setLastName(sName);
-                entityManager.getTransaction().begin();
-                entityManager.persist(employee);
-                entityManager.getTransaction().commit();
-                entityManager.close();
-                entityManagerFactory.close();
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
-
     public void destroy() {
     }
 }
