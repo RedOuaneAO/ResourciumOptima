@@ -31,5 +31,7 @@ public class EmployeeService {
         return employeeList;
     }
 
-
+    public void deleteEmp(String userId) {
+        employeeRepo.deleteEmployee(userId);
+    }
 }

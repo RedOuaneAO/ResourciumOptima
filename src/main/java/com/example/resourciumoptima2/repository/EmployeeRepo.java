@@ -71,5 +71,21 @@ public class EmployeeRepo {
         return null;
     }
 
-
+    public void deleteEmployee(String userId) {
+        EntityManager entityManager =entityManagerFactory.createEntityManager();
+        int id = Integer.parseInt(userId);
+        try{
+            Employee emp =entityManager.find(Employee.class,id);
+            entityManager.getTransaction().begin();
+            entityManager.remove(emp);
+            entityManager.getTransaction().commit();
+        }catch (Exception e){
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }finally {
+            entityManager.close();
+        }
+    }
 }
