@@ -30,4 +30,29 @@ public class EmployeeRepo {
     }
 
 
+
+    public Object auth(Employee employee) {
+        String userName = employee.getUserName();
+//        String password = employee.getPassword();
+        EntityManager entityManager =entityManagerFactory.createEntityManager();
+        try{
+            entityManager.getTransaction().begin();
+            Query query =entityManager.createQuery("select e from Employee e where e.userName = :userName" , Employee.class);
+            query.setParameter("userName", userName);
+//            List<Employee> emp =query.getResultList();
+            Object emp =query.getSingleResult();
+            entityManager.getTransaction().commit();
+           return emp;
+        }catch (Exception e){
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }finally {
+            entityManager.close();
+        }
+        return null;
+    }
+
+
 }

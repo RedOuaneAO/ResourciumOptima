@@ -24,7 +24,18 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String userName = request.getParameter("userName");
+        String password = request.getParameter("password");
+        Employee employee =new Employee(userName,password);
+        Employee result =(Employee) employeeService.userLogin(employee);
+        request.setAttribute("userData" , result);
+        if(!BCrypt.checkpw(password ,result.getPassword())){
+            response.sendRedirect("login.jsp");
+        }else {
+            HttpSession session = request.getSession();
+            session.setAttribute("userName", userName);
+            response.sendRedirect("dash.jsp");
+        }
         }
     }
 

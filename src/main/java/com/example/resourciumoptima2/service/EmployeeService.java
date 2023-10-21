@@ -21,5 +21,9 @@ public class EmployeeService {
     public void addEmlpoyee(Employee employee) {
         employeeRepo.saveEmployee(employee);
     }
+//    login
+    public Object userLogin(Employee employee){
+      return employeeRepo.auth(employee);
+    }
 
 }
