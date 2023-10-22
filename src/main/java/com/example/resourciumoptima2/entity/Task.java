@@ -8,7 +8,7 @@ import java.util.Date;
 @Table(name = "task")
 public class Task {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String description;

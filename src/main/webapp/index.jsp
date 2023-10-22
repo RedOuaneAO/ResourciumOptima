@@ -24,7 +24,6 @@
             <div class="d-flex justify-content-center align-items-center mt-4">
                 <a href="login.jsp" class="btn btn-outline-primary me-4 px-4">login</a>
                 <a href="register.jsp" class="btn btn-primary px-4">regitser</a>
-                <a href="EmployeesServlet" class="btn btn-primary px-4">Employee</a>
             </div>
        </div>
         <div class="mt-5">
