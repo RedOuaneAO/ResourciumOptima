@@ -1,6 +1,8 @@
-<%--<% if (session.getAttribute("userName") ==null){--%>
-<%--  response.sendRedirect("login.jsp");--%>
-<%--}%>--%>
+<%@ page import="com.example.resourciumoptima2.entity.Task" %>
+<%@ page import="java.util.List" %>
+<% if (session.getAttribute("userName") ==null){
+  response.sendRedirect("login.jsp");
+}%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -36,7 +38,13 @@
             </a>
           </li>
           <li>
-            <a href="#" class="nav-link px-0 text-white">
+            <a href="DepartmentServlet" class="nav-link px-0 text-white">
+              <i class="bi bi-speedometer2"></i>
+              <span class="ms-1 d-none d-sm-inline">Department</span>
+            </a>
+          </li>
+          <li>
+            <a href="TasksServlet" class="nav-link px-0 text-white">
               <i class="bi bi-plus-circle"></i>
               <span class="ms-1 d-none d-sm-inline">Tasks</span>
             </a>
@@ -103,17 +111,28 @@
                           <th scope="col">priority</th>
                           <th scope="col">To</th>
                           <th scope="col">status</th>
+                          <th scope="col">Action</th>
                         </tr>
                         </thead>
                         <tbody>
+                        <% if (request.getAttribute("result") != null) {
+                          List<Task> tasksList = (List<Task>) request.getAttribute("result");
+                          for (Task task:tasksList) {%>
                         <tr>
-                          <td><p></p></td>
-                          <td><p></p></td>
-                          <td><p></p></td>
-                          <td><p></p></td>
-                          <td><p></p></td>
-                          <td></td>
+                          <td><p><%= task.getName() %></p></td>
+                          <td><p><%= task.getDescription() %></p></td>
+                          <td><p><%= task.getLimitDate()%></p></td>
+                          <td><p><%= task.getPriority() %></p></td>
+                          <td><p><%= task.getEmployee() %></p></td>
+                          <td><p><%= task.getStatus() %></p></td>
+                          <td>
+                            <form action="TasksServlet" method="DELETE">
+                              <input type="text" value="<%=task.getId()%>" name="id" hidden>
+                              <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                          </td>
                         </tr>
+                        <%} } %>
                         </tbody>
                       </table>
                     </div>

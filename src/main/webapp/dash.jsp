@@ -51,7 +51,7 @@
                 </a>
             </li>
           <li>
-            <a href="tasks.jsp" class="nav-link px-0 text-white">
+            <a href="TasksServlet" class="nav-link px-0 text-white">
               <i class="bi bi-plus-circle"></i>
               <span class="ms-1 d-none d-sm-inline">Tasks</span>
             </a>

@@ -36,7 +36,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-0 text-white">
+                        <a href="DepartmentServlet" class="nav-link px-0 text-white">
+                            <i class="bi bi-speedometer2"></i>
+                            <span class="ms-1 d-none d-sm-inline">Department</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="TasksServlet" class="nav-link px-0 text-white">
                             <i class="bi bi-plus-circle"></i>
                             <span class="ms-1 d-none d-sm-inline">Tasks</span>
                         </a>

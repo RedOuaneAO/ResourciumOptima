@@ -1,7 +1,7 @@
-<%--<% if (session.getAttribute("userName") ==null){--%>
-<%--  response.sendRedirect("login.jsp");--%>
-<%--}%>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% if (session.getAttribute("userName") ==null){
+  response.sendRedirect("login.jsp");
+}%>
 <html>
 <head>
   <title>Equipment</title>
@@ -36,7 +36,13 @@
             </a>
           </li>
           <li>
-            <a href="#" class="nav-link px-0 text-white">
+            <a href="DepartmentServlet" class="nav-link px-0 text-white">
+              <i class="bi bi-speedometer2"></i>
+              <span class="ms-1 d-none d-sm-inline">Department</span>
+            </a>
+          </li>
+          <li>
+            <a href="TasksServlet" class="nav-link px-0 text-white">
               <i class="bi bi-plus-circle"></i>
               <span class="ms-1 d-none d-sm-inline">Tasks</span>
             </a>

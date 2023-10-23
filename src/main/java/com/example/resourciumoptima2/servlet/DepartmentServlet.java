@@ -18,8 +18,6 @@ public class DepartmentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Departement> departmentList = departmentService.getAllDepartment();
-//        PrintWriter out = response.getWriter();
-//        out.println(departmentList);
         request.setAttribute("result", departmentList);
         RequestDispatcher requestDispatcher= request.getRequestDispatcher("department.jsp");
         requestDispatcher.forward(request,response);
@@ -31,6 +29,5 @@ public class DepartmentServlet extends HttpServlet {
         Departement departement = new Departement(name, description);
         departmentService.addDepartment(departement);
         response.sendRedirect(request.getContextPath() + "/DepartmentServlet");
-//        response.sendRedirect("department.jsp");
     }
 }

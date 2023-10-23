@@ -1,7 +1,8 @@
 <%@ page import="com.example.resourciumoptima2.entity.Departement" %>
-<%@ page import="java.util.List" %><%--<% if (session.getAttribute("userName") ==null){--%>
-<%--  response.sendRedirect("login.jsp");--%>
-<%--}%>--%>
+<%@ page import="java.util.List" %>
+<% if (session.getAttribute("userName") ==null){
+  response.sendRedirect("login.jsp");
+}%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -37,7 +38,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-0 text-white">
+                        <a href="DepartmentServlet" class="nav-link px-0 text-white">
+                            <i class="bi bi-speedometer2"></i>
+                            <span class="ms-1 d-none d-sm-inline">Department</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="TasksServlet" class="nav-link px-0 text-white">
                             <i class="bi bi-plus-circle"></i>
                             <span class="ms-1 d-none d-sm-inline">Tasks</span>
                         </a>
@@ -103,6 +110,7 @@
                                                     <th scope="col">action</th>
                                                 </tr>
                                                 </thead>
+                                                <tbody>
                                                 <% if (request.getAttribute("result") != null) {
                                                     List<Departement> departmentList = (List<Departement>) request.getAttribute("result");
                                                     for (Departement dep:departmentList) {%>

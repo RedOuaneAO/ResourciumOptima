@@ -1,5 +1,6 @@
 package com.example.resourciumoptima2.servlet;
 
+import com.example.resourciumoptima2.entity.Departement;
 import com.example.resourciumoptima2.entity.Task;
 import com.example.resourciumoptima2.service.EmployeeService;
 import com.example.resourciumoptima2.service.TasksService;
@@ -12,6 +13,7 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @WebServlet(name = "TasksServlet", value = "/TasksServlet")
 public class TasksServlet extends HttpServlet {
@@ -21,7 +23,10 @@ public class TasksServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        List<Task> taskList = tasksService.getAllTasks();
+        request.setAttribute("result", taskList);
+        RequestDispatcher requestDispatcher= request.getRequestDispatcher("tasks.jsp");
+        requestDispatcher.forward(request,response);
     }
 
     @Override
@@ -39,8 +44,12 @@ public class TasksServlet extends HttpServlet {
         }
         Task task =new Task(name , description ,limitDate , priority);
         tasksService.addTask(task);
-
-//        PrintWriter printWriter =response.getWriter();
-//        printWriter.println(limitDate);
+        response.sendRedirect(request.getContextPath() + "/TasksServlet");
+    }
+    @Override
+    protected  void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("id");
+        PrintWriter out= response.getWriter();
+        out.println(id);
     }
 }

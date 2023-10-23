@@ -32,7 +32,6 @@
                                     <option selected disabled>Position</option>
                                     <option value="Employee">Employee</option>
                                     <option value="Developer">Developer</option>
-                                    <option value="Chef">Chef</option>
                                 </select>
                             </div>
                             <div class="mb-4">
