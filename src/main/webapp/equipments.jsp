@@ -80,16 +80,16 @@
               <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h3 class="mb-0 text-secondary">Tasks</h3>
               </div>
-              <div>
-                <button type="button" class="btn btn-primary">Add Equipment</button>
-              </div>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Add Equipment
+              </button>
             </div>
             <div class="row">
               <div class=" d-flex justify-content-center ">
                 <div class="card shadow mb-4 col-8">
                   <%--                  Card Header - Dropdown ----%>
                   <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Tasks</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Equipments</h6>
                   </div>
                   <%--                  -- Card Body ----%>
                   <div class="card-body">
@@ -123,6 +123,45 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%--modal--%>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Equipment</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <form>
+         <form action="LoginServlet" method="post">
+           <div class="mb-4">
+             <label class="form-label">Name</label>
+             <input type="text" class="form-control" name="name" required>
+           </div>
+           <div class="mb-4">
+             <label class="form-label">Type</label>
+             <input type="text" class="form-control" name="type" required>
+           </div>
+           <div class="mb-4">
+             <label class="form-label">State</label>
+             <input type="text" class="form-control" name="state" required>
+           </div>
+<%--           <div class="mb-4">--%>
+<%--             <label class="form-label">Type</label>--%>
+<%--             <input type="text" class="form-control" name="type" required>--%>
+<%--           </div>--%>
+
+           <button type="submit" class="btn btn-primary">Add</button>
+         </form>
+       </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

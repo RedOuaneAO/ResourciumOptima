@@ -44,14 +44,20 @@
               <span class="ms-1 d-none d-sm-inline">Employees</span>
             </a>
           </li>
+            <li>
+                <a href="" class="nav-link px-0 text-white">
+                    <i class="bi bi-speedometer2"></i>
+                    <span class="ms-1 d-none d-sm-inline">Department</span>
+                </a>
+            </li>
           <li>
-            <a href="#" class="nav-link px-0 text-white">
+            <a href="tasks.jsp" class="nav-link px-0 text-white">
               <i class="bi bi-plus-circle"></i>
               <span class="ms-1 d-none d-sm-inline">Tasks</span>
             </a>
           </li>
           <li>
-            <a href="#" class="nav-link px-0 text-white">
+            <a href="equipments.jsp" class="nav-link px-0 text-white">
               <i class="bi bi-person-circle"></i>
               <span class="ms-1 d-none d-sm-inline">Equipment</span></a>
           </li>

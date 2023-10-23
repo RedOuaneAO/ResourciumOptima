@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Query;
 import java.util.List;
+import java.util.Optional;
 
 public class EmployeeRepo {
     private final EntityManagerFactory entityManagerFactory;
@@ -56,10 +57,10 @@ public class EmployeeRepo {
             entityManager.getTransaction().begin();
             Query query =entityManager.createQuery("select e from Employee e where e.userName = :userName" , Employee.class);
             query.setParameter("userName", userName);
-//            List<Employee> emp =query.getResultList();
             Object emp =query.getSingleResult();
             entityManager.getTransaction().commit();
-           return emp;
+//            return Optional.ofNullable(emp);
+            return emp;
         }catch (Exception e){
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
@@ -73,7 +74,7 @@ public class EmployeeRepo {
 
     public void deleteEmployee(String userId) {
         EntityManager entityManager =entityManagerFactory.createEntityManager();
-        int id = Integer.parseInt(userId);
+        long id = Long.parseLong(userId);
         try{
             Employee emp =entityManager.find(Employee.class,id);
             entityManager.getTransaction().begin();

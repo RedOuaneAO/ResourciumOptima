@@ -80,9 +80,9 @@
               <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h3 class="mb-0 text-secondary">Tasks</h3>
               </div>
-              <div>
-                <button type="button" class="btn btn-primary">Add Task</button>
-              </div>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Add Task
+              </button>
             </div>
             <div class="row">
               <div class=" d-flex justify-content-center ">
@@ -123,6 +123,45 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%--modal--%>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add a task</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <form action="LoginServlet" method="post">
+            <div class="mb-4">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Description</label>
+              <input type="text" class="form-control" name="description" required>
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Priority</label>
+<%--              <input type="text" class="form-control" name="priority" required>--%>
+              <select class="form-select" name="priority">
+                <option>t</option>
+                <option>k</option>
+                <option>l</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+          </form>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
