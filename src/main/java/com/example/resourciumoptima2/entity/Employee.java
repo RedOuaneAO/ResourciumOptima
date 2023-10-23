@@ -17,6 +17,8 @@ public class Employee {
     private String password;
     private String position;
     private Date recDate;
+    @ManyToOne
+    private Departement departement;
 
     public Employee() {
     }

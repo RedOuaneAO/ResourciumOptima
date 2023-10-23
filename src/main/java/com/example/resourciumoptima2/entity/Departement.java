@@ -14,9 +14,8 @@ public class Departement {
     private int id;
     private String name;
     private String description;
-
-    @OneToMany
-    private List<Employee> employees;
+//    @OneToMany
+//    private List<Employee> employees;
     public int getId() {
         return id;
     }
@@ -36,11 +35,20 @@ public class Departement {
         this.description = description;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
-    }
+//    public List<Employee> getEmployees() {
+//        return employees;
+//    }
+//
+//    public void setEmployees(List<Employee> employees) {
+//        this.employees = employees;
+//    }
 
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
+    @Override
+    public String toString() {
+        return "Departement{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

@@ -18,7 +18,7 @@ public class Task {
     private Employee employee;
     private String status;
 
-    public Task(String name, String description, String priority) {
+    public Task(String name, String description, Date limitDate,String priority) {
         this.name = name;
         this.description = description;
 //        this.limitDate = limitDate;
