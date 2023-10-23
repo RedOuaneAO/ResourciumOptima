@@ -29,10 +29,16 @@ public class LoginServlet extends HttpServlet {
         Employee employee =new Employee(userName,password);
         Employee result =(Employee) employeeService.userLogin(employee);
         request.setAttribute("userData" , result);
+        HttpSession session = request.getSession();
+        if (result==null){
+            session.setAttribute("error" , "the userName or password is not correct");
+            response.sendRedirect("login.jsp");
+            return;
+        }
         if(!BCrypt.checkpw(password ,result.getPassword())){
+            session.setAttribute("error" , "the userName or password is not correct");
             response.sendRedirect("login.jsp");
         }else {
-            HttpSession session = request.getSession();
             session.setAttribute("userName", userName);
             response.sendRedirect("dash.jsp");
         }

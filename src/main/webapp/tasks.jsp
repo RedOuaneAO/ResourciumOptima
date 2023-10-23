@@ -1,5 +1,6 @@
 <%@ page import="com.example.resourciumoptima2.entity.Task" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <% if (session.getAttribute("userName") ==null){
   response.sendRedirect("login.jsp");
 }%>
@@ -118,16 +119,19 @@
                         <tbody>
                         <% if (request.getAttribute("result") != null) {
                           List<Task> tasksList = (List<Task>) request.getAttribute("result");
+                          SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
                           for (Task task:tasksList) {%>
                         <tr>
                           <td><p><%= task.getName() %></p></td>
                           <td><p><%= task.getDescription() %></p></td>
-                          <td><p><%= task.getLimitDate()%></p></td>
+                          <td><p><%= dateFormat.format(task.getLimitDate())%></p></td>
                           <td><p><%= task.getPriority() %></p></td>
                           <td><p><%= task.getEmployee() %></p></td>
                           <td><p><%= task.getStatus() %></p></td>
                           <td>
                             <a href="TasksServlet?id=<%=task.getId()%>" class="btn btn-danger"> Delete</a>
+                            <a href="updateTask.jsp/?id=<%=task.getId()%>" class="btn btn-danger"> Update</a>
                           </td>
                         </tr>
                         <%} } %>

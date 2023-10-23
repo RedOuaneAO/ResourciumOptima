@@ -31,25 +31,25 @@
                     </li>
                     <li>
                         <a href="EmployeesServlet" class="nav-link px-0 text-white">
-                            <i class="bi bi-speedometer2"></i>
+                            <i class="bi bi-people-fill"></i>
                             <span class="ms-1 d-none d-sm-inline">Employees</span>
                         </a>
                     </li>
                     <li>
                         <a href="DepartmentServlet" class="nav-link px-0 text-white">
-                            <i class="bi bi-speedometer2"></i>
+                            <i class="bi bi-house-door"></i>
                             <span class="ms-1 d-none d-sm-inline">Department</span>
                         </a>
                     </li>
                     <li>
                         <a href="TasksServlet" class="nav-link px-0 text-white">
-                            <i class="bi bi-plus-circle"></i>
+                            <i class="bi bi-list-task"></i>
                             <span class="ms-1 d-none d-sm-inline">Tasks</span>
                         </a>
                     </li>
                     <li>
                         <a href="#" class="nav-link px-0 text-white">
-                            <i class="bi bi-person-circle"></i>
+                            <i class="bi bi-nut"></i>
                             <span class="ms-1 d-none d-sm-inline">Equipment</span></a>
                     </li>
                     <li>
