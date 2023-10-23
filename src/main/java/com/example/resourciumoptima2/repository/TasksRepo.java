@@ -1,6 +1,7 @@
 package com.example.resourciumoptima2.repository;
 
 import com.example.resourciumoptima2.entity.Departement;
+import com.example.resourciumoptima2.entity.Employee;
 import com.example.resourciumoptima2.entity.Task;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -50,4 +51,20 @@ public class TasksRepo {
         return null;
     }
 
+    public void delete(int id) {
+        EntityManager entityManager =entityManagerFactory.createEntityManager();
+        try{
+            Task task =entityManager.find(Task.class,id);
+            entityManager.getTransaction().begin();
+            entityManager.remove(task);
+            entityManager.getTransaction().commit();
+        }catch (Exception e){
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }finally {
+            entityManager.close();
+        }
+    }
 }

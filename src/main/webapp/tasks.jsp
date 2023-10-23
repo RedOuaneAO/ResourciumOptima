@@ -126,10 +126,7 @@
                           <td><p><%= task.getEmployee() %></p></td>
                           <td><p><%= task.getStatus() %></p></td>
                           <td>
-                            <form action="TasksServlet" method="DELETE">
-                              <input type="text" value="<%=task.getId()%>" name="id" hidden>
-                              <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
+                            <a href="TasksServlet?id=<%=task.getId()%>" class="btn btn-danger"> Delete</a>
                           </td>
                         </tr>
                         <%} } %>

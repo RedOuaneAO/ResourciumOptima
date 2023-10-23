@@ -24,4 +24,8 @@ public class TasksService {
     public List<Task> getAllTasks() {
         return tasksRepo.getTasks();
     }
+
+    public void deleteTask(int id) {
+        tasksRepo.delete(id);
+    }
 }
