@@ -25,4 +25,8 @@ public class DepartmentService {
         List<Departement> deparList =departmentRepo.getDepartments();
         return deparList;
     }
+
+    public void deletedepart(int id) {
+        departmentRepo.delete(id);
+    }
 }

@@ -17,10 +17,17 @@ public class DepartmentServlet extends HttpServlet {
     private DepartmentService departmentService =new DepartmentService() ;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String departId = request.getParameter("id");
+        if(departId !=null){
+            int id = Integer.parseInt(departId);
+            departmentService.deletedepart(id);
+            response.sendRedirect(request.getContextPath() + "/DepartmentServlet");
+        }else{
         List<Departement> departmentList = departmentService.getAllDepartment();
         request.setAttribute("result", departmentList);
         RequestDispatcher requestDispatcher= request.getRequestDispatcher("department.jsp");
         requestDispatcher.forward(request,response);
+        }
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

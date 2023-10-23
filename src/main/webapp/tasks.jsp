@@ -8,6 +8,7 @@
 <head>
   <title>Tasks</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
 </head>
 <body>
 <div class="container-fluid">
@@ -33,25 +34,25 @@
           </li>
           <li>
             <a href="EmployeesServlet" class="nav-link px-0 text-white">
-              <i class="bi bi-speedometer2"></i>
+              <i class="bi bi-people-fill"></i>
               <span class="ms-1 d-none d-sm-inline">Employees</span>
             </a>
           </li>
           <li>
             <a href="DepartmentServlet" class="nav-link px-0 text-white">
-              <i class="bi bi-speedometer2"></i>
+              <i class="bi bi-house-door"></i>
               <span class="ms-1 d-none d-sm-inline">Department</span>
             </a>
           </li>
           <li>
             <a href="TasksServlet" class="nav-link px-0 text-white">
-              <i class="bi bi-plus-circle"></i>
+              <i class="bi bi-list-task"></i>
               <span class="ms-1 d-none d-sm-inline">Tasks</span>
             </a>
           </li>
           <li>
             <a href="#" class="nav-link px-0 text-white">
-              <i class="bi bi-person-circle"></i>
+              <i class="bi bi-nut"></i>
               <span class="ms-1 d-none d-sm-inline">Equipment</span></a>
           </li>
           <li>

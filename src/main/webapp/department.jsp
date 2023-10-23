@@ -118,10 +118,7 @@
                                                     <td><p><%= dep.getName() %></p></td>
                                                     <td><p><%= dep.getDescription() %></p></td>
                                                     <td>
-                                                        <form action="EmployeesServlet" method="post">
-                                                            <input type="text" value="<%= dep.getId()%>" name="userId" hidden>
-                                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                                        </form>
+                                                        <a href="DepartmentServlet?id=<%=dep.getId()%>" class="btn btn-danger"> Delete</a>
                                                     </td>
                                                 </tr>
                                                 <%} } %>

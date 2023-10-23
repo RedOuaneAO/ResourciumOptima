@@ -49,4 +49,21 @@ public class DepartmentRepo {
         }
         return null;
     }
+
+    public void delete(int id) {
+        EntityManager entityManager =entityManagerFactory.createEntityManager();
+        try{
+            Departement department =entityManager.find(Departement.class,id);
+            entityManager.getTransaction().begin();
+            entityManager.remove(department);
+            entityManager.getTransaction().commit();
+        }catch (Exception e){
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }finally {
+            entityManager.close();
+        }
+    }
 }
