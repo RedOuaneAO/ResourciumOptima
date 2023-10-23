@@ -136,8 +136,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
-          <form action="LoginServlet" method="post">
+          <form action="TasksServlet" method="post">
             <div class="mb-4">
               <label class="form-label">Name</label>
               <input type="text" class="form-control" name="name" required>
@@ -147,22 +146,24 @@
               <input type="text" class="form-control" name="description" required>
             </div>
             <div class="mb-4">
+              <label class="form-label">Limit Date</label>
+              <input type="date" class="form-control" name="limitDate" required>
+            </div>
+            <div class="mb-4">
               <label class="form-label">Priority</label>
-<%--              <input type="text" class="form-control" name="priority" required>--%>
               <select class="form-select" name="priority">
-                <option>t</option>
-                <option>k</option>
-                <option>l</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
               </select>
             </div>
-            <button type="submit" class="btn btn-primary">Add</button>
-          </form>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+<%--            <button type="submit" class="btn btn-primary">Add</button>--%>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

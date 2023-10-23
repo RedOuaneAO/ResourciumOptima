@@ -18,6 +18,16 @@ public class Task {
     private Employee employee;
     private String status;
 
+    public Task(String name, String description, String priority) {
+        this.name = name;
+        this.description = description;
+//        this.limitDate = limitDate;
+        this.priority = priority;
+    }
+
+    public Task() {
+    }
+
     public String getName() {
         return name;
     }
@@ -72,5 +82,18 @@ public class Task {
 
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", limitDate=" + limitDate +
+                ", priority='" + priority + '\'' +
+                ", employee=" + employee +
+                ", status='" + status + '\'' +
+                '}';
     }
 }
