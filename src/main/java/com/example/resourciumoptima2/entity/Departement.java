@@ -8,14 +8,23 @@ import java.util.List;
 @Entity
 @Table(name = "departement")
 public class Departement {
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name ="id")
     private int id;
     private String name;
     private String description;
 //    @OneToMany
 //    private List<Employee> employees;
+
+    public Departement(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public Departement() {
+    }
+
     public int getId() {
         return id;
     }

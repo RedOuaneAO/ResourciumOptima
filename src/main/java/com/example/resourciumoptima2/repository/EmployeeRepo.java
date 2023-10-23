@@ -31,7 +31,7 @@ public class EmployeeRepo {
     }
 
     public List<Employee> getAllEmployees() {
-        EntityManager entityManager =entityManagerFactory.createEntityManager();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select e from Employee e ", Employee.class);

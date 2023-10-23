@@ -1,4 +1,5 @@
-<%--<% if (session.getAttribute("userName") ==null){--%>
+<%@ page import="com.example.resourciumoptima2.entity.Departement" %>
+<%@ page import="java.util.List" %><%--<% if (session.getAttribute("userName") ==null){--%>
 <%--  response.sendRedirect("login.jsp");--%>
 <%--}%>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -99,13 +100,23 @@
                                                 <tr>
                                                     <th scope="col">Name</th>
                                                     <th scope="col">description</th>
+                                                    <th scope="col">action</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
+                                                <% if (request.getAttribute("result") != null) {
+                                                    List<Departement> departmentList = (List<Departement>) request.getAttribute("result");
+                                                    for (Departement dep:departmentList) {%>
                                                 <tr>
-                                                    <td><p></p></td>
-                                                    <td><p></p></td>
+                                                    <td><p><%= dep.getName() %></p></td>
+                                                    <td><p><%= dep.getDescription() %></p></td>
+                                                    <td>
+                                                        <form action="EmployeesServlet" method="post">
+                                                            <input type="text" value="<%= dep.getId()%>" name="userId" hidden>
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </form>
+                                                    </td>
                                                 </tr>
+                                                <%} } %>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -128,7 +139,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="" method="post">
+                <form action="DepartmentServlet" method="post">
                     <div class="mb-4">
                         <label class="form-label">Name</label>
                         <input type="text" class="form-control" name="name" required>
@@ -145,7 +156,6 @@
 <%--                            <option value="High">High</option>--%>
 <%--                        </select>--%>
 <%--                    </div>--%>
-                    <%--            <button type="submit" class="btn btn-primary">Add</button>--%>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

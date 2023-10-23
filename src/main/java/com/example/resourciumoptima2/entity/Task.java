@@ -21,7 +21,7 @@ public class Task {
     public Task(String name, String description, Date limitDate,String priority) {
         this.name = name;
         this.description = description;
-//        this.limitDate = limitDate;
+        this.limitDate = limitDate;
         this.priority = priority;
     }
 
