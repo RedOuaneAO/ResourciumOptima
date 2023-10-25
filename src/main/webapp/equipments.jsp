@@ -126,12 +126,8 @@
                             <p>State : <span class="fw-bold me-2"><%= equipement.getState()%></span></p>
                             <p class="card-text text-secondary my-2" style="font-size: 14px"><sapan>Buying Date</sapan> <%= simpleDateFormat.format(equipement.getBuyingDate()) %></p>
                             <div class="d-flex justify-content-between">
-                              <form method="post" action="ReservationServlet">
-                                <input type="text" value="<%= equipement.getId()%>" name="equipmentId" hidden>
-                                  <button class="btn btn-success " type="submit">Reserve</button>
-<%--                                   <a href="ReservationServlet?id=<%= equipement.getId()%>" class="btn btn-success">Reserve</a>--%>
-                              </form>
-                             <a href="EquipmentServlet?id=<%= equipement.getId()%>" class="btn btn-danger">Delete</a>
+                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reserve">Reserve</button>
+                              <a href="EquipmentServlet?id=<%= equipement.getId()%>" class="btn btn-danger">Delete</a>
                             </div>
                           </div>
                         </div>
@@ -141,86 +137,9 @@
             <%} } %>
           </div>
     </div>
-
-
-
-
-
-
-<%--    <div class="col py-3 overflow-x-hidden overflow-y-scroll" style="height: 100vh">--%>
-<%--      &lt;%&ndash;     -- Content Wrapper --&ndash;%&gt;--%>
-<%--      <div class="d-flex flex-column">--%>
-<%--        &lt;%&ndash;     -- Main Content --&ndash;%&gt;--%>
-<%--        <div>--%>
-<%--          &lt;%&ndash;         -- Topbar --&ndash;%&gt;--%>
-<%--          <nav class="navbar navbar-expand  mb-4 shadow">--%>
-<%--            <div>--%>
-<%--              <p class="fs-5 ms-4">Welcome <span> ${ sessionScope.userName } !</span></p>--%>
-<%--            </div>--%>
-<%--          </nav>--%>
-<%--          &lt;%&ndash;          End of Topbar -&ndash;%&gt;--%>
-<%--          &lt;%&ndash;          Begin Page Content --&ndash;%&gt;--%>
-<%--          <div class="container-fluid">--%>
-<%--            &lt;%&ndash;             Page Heading &ndash;%&gt;--%>
-<%--            <div class="d-flex justify-content-between">--%>
-<%--              <div class="d-sm-flex align-items-center justify-content-between mb-4">--%>
-<%--                <h3 class="mb-0 text-secondary">Tasks</h3>--%>
-<%--              </div>--%>
-<%--              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">--%>
-<%--                Add Equipment--%>
-<%--              </button>--%>
-<%--            </div>--%>
-<%--            <div class="row">--%>
-<%--              <div class=" d-flex justify-content-center ">--%>
-<%--                <div class="card shadow mb-4 col-8">--%>
-<%--                  &lt;%&ndash;                  Card Header - Dropdown --&ndash;%&gt;--%>
-<%--                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">--%>
-<%--                    <h6 class="m-0 font-weight-bold text-primary">Equipments</h6>--%>
-<%--                  </div>--%>
-<%--                  &lt;%&ndash;                  -- Card Body --&ndash;%&gt;--%>
-<%--                  <div class="card-body">--%>
-<%--                    <div class="table-responsive">--%>
-<%--                      <table class="table table-striped border">--%>
-<%--                        <thead class="bg-secondary bg-opacity-25">--%>
-<%--                        <tr>--%>
-<%--                          <th scope="col">Name</th>--%>
-<%--                          <th scope="col">Type</th>--%>
-<%--                          <th scope="col">State</th>--%>
-<%--&lt;%&ndash;                          <th scope="col">reserved by</th>&ndash;%&gt;--%>
-<%--                          <th scope="col">buyingDate</th>--%>
-<%--                          <th scope="col">maintDate</th>--%>
-<%--                          <th scope="col">Action</th>--%>
-<%--                        </tr>--%>
-<%--                        </thead>--%>
-<%--                        <tbody>--%>
-<%--                        <% if (request.getAttribute("equipmentList") != null) {--%>
-<%--                          List<Equipement> equipmentList = (List<Equipement>) request.getAttribute("equipmentList");--%>
-<%--                          for (Equipement equipement : equipmentList) {%>--%>
-<%--                          <tr>--%>
-<%--                            <td><p><%= equipement.getName() %></p></td>--%>
-<%--                            <td><p><%= equipement.getType()%></p></td>--%>
-<%--                            <td><p><%= equipement.getState()%></p></td>--%>
-<%--                            <td><p><%= equipement.getBuyingDate()%></p></td>--%>
-<%--                            <td><p><%= equipement.getMaintDate()%></p></td>--%>
-<%--                            <td>--%>
-<%--                              <a href="EquipmentServlet?id=<%=equipement.getId()%>" class="btn btn-danger"> Delete</a>--%>
-<%--                            </td>--%>
-<%--                          </tr>--%>
-<%--                        <%} } %>--%>
-<%--                        </tbody>--%>
-<%--                      </table>--%>
-<%--                    </div>--%>
-<%--                  </div>--%>
-<%--                </div>--%>
-<%--              </div>--%>
-<%--            </div>--%>
-<%--          </div>--%>
-<%--        </div>--%>
-<%--      </div>--%>
-<%--    </div>--%>
   </div>
 </div>
-<%--modal--%>
+<%-- add equipment modal--%>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -259,6 +178,37 @@
     </div>
   </div>
 </div>
+
+
+<%--          reservation modal--%>
+<%--          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reserve">Reserve</button>--%>
+          <div class="modal fade" id="reserve" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5">Modal title</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form method="post" action="ReservationServlet">
+                    <input type="text" value="" name="equipmentId" hidden>
+                    <div class="mb-4">
+                      <label class="form-label">Reservation Date</label>
+                      <input type="date" class="form-control" name="resrvDate" required>
+                    </div>
+                    <div class="mb-4">
+                      <label class="form-label">reture Date</label>
+                      <input type="date" class="form-control" name="returDate" required>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 </body>

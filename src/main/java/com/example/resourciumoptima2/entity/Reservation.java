@@ -18,8 +18,7 @@ public class Reservation {
     @ManyToOne
     private Equipement equipement;
 
-    public Reservation(Long id, Date startDate, Date endDate, Employee employee, Equipement equipement) {
-        this.id = id;
+    public Reservation(Date startDate, Date endDate, Employee employee, Equipement equipement) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.employee = employee;

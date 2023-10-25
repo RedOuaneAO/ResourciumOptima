@@ -1,6 +1,7 @@
 package com.example.resourciumoptima2.repository;
 
 import com.example.resourciumoptima2.entity.Employee;
+import com.example.resourciumoptima2.entity.Equipement;
 import com.example.resourciumoptima2.entity.Reservation;
 import com.example.resourciumoptima2.entity.Task;
 import jakarta.persistence.EntityManager;
@@ -59,6 +60,41 @@ public class ReservationRepo {
             }
             e.printStackTrace();
         }finally {
+            entityManager.close();
+        }
+    }
+
+    public List<Equipement> getEquipments() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("select e from Equipement e", Equipement.class);
+            List<Equipement> equipements = query.getResultList();
+            entityManager.getTransaction().commit();
+            return equipements;
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+        return null;
+    }
+
+    public void addReservation(Reservation reservation1) {
+        EntityManager entityManager =entityManagerFactory.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(reservation1);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
             entityManager.close();
         }
     }

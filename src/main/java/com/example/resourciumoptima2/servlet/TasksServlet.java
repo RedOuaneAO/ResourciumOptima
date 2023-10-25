@@ -42,15 +42,15 @@ public class TasksServlet extends HttpServlet {
            String description = request.getParameter("description");
            String date = request.getParameter("limitDate");
            String priority = request.getParameter("priority");
-        Date limitDate = null;
-        SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyy-MM-dd");
-        try{
-        limitDate = simpleDateFormat.parse(date);
-        }catch (ParseException e){
-            e.printStackTrace();
-        }
-        Task task =new Task(name , description ,limitDate , priority);
-        tasksService.addTask(task);
-        response.sendRedirect(request.getContextPath() + "/TasksServlet");
+            Date limitDate = null;
+            SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyy-MM-dd");
+            try{
+            limitDate = simpleDateFormat.parse(date);
+            }catch (ParseException e){
+                e.printStackTrace();
+            }
+            Task task =new Task(name , description ,limitDate , priority);
+            tasksService.addTask(task);
+            response.sendRedirect(request.getContextPath() + "/TasksServlet");
     }
 }

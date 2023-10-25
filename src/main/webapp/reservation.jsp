@@ -1,6 +1,7 @@
 <%@ page import="com.example.resourciumoptima2.entity.Departement" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.resourciumoptima2.entity.Reservation" %>
+<%@ page import="com.example.resourciumoptima2.entity.Equipement" %>
 <%--<% if (session.getAttribute("userName") ==null){--%>
 <%--    response.sendRedirect("login.jsp");--%>
 <%--}%>--%>
@@ -57,7 +58,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-0 text-white">
+                        <a href="EquipmentServlet" class="nav-link px-0 text-white">
                             <i class="bi bi-nut"></i>
                             <span class="ms-1 d-none d-sm-inline">Equipment</span></a>
                     </li>
@@ -95,9 +96,9 @@
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                                 <h3 class="mb-0 text-secondary">Reservation</h3>
                             </div>
-<%--                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">--%>
-<%--                                Add Department--%>
-<%--                            </button>--%>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Make a Reservation
+                            </button>
                         </div>
                         <div class="row">
                             <div class=" d-flex justify-content-center ">
@@ -157,23 +158,25 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="DepartmentServlet" method="post">
+                <form action="ReservationServlet" method="post">
                     <div class="mb-4">
-                        <label class="form-label">Name</label>
-                        <input type="text" class="form-control" name="name" required>
+                        <label class="form-label">Equipment</label>
+                        <select class="form-control" name="equipmentId">
+                            <option disabled>Select</option>
+                            <% List<Equipement> equipementsList = (List<Equipement>) request.getSession().getAttribute("Equipments");
+                                for (Equipement equip:equipementsList) {%>
+                                    <option value="<%=equip.getId()%>"><%= equip.getName()%></option>
+                            <%}%>
+                        </select>
                     </div>
                     <div class="mb-4">
-                        <label class="form-label">Description</label>
-                        <input type="text" class="form-control" name="description" required>
+                        <label class="form-label">Reservation Date</label>
+                        <input type="date" class="form-control" name="resrvDate" required>
                     </div>
-                    <%--                    <div class="mb-4">--%>
-                    <%--                        <label class="form-label">Department Chef</label>--%>
-                    <%--                        <select class="form-select" name="departmentChef">--%>
-                    <%--                            <option value="Low">Low</option>--%>
-                    <%--                            <option value="Medium">Medium</option>--%>
-                    <%--                            <option value="High">High</option>--%>
-                    <%--                        </select>--%>
-                    <%--                    </div>--%>
+                    <div class="mb-4">
+                        <label class="form-label">reture Date</label>
+                        <input type="date" class="form-control" name="returDate" required>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

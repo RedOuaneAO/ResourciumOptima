@@ -1,6 +1,7 @@
 package com.example.resourciumoptima2.service;
 
 import com.example.resourciumoptima2.entity.Employee;
+import com.example.resourciumoptima2.entity.Equipement;
 import com.example.resourciumoptima2.entity.Reservation;
 import com.example.resourciumoptima2.repository.EmployeeRepo;
 import com.example.resourciumoptima2.repository.ReservationRepo;
@@ -32,4 +33,11 @@ public class ReservationService {
         return employeeRepo.auth(employee);
     }
 
+    public List<Equipement> getAllReservation() {
+        return reservationRepo.getEquipments();
+    }
+
+    public void makeReservation(Reservation reservation1) {
+        reservationRepo.addReservation(reservation1);
+    }
 }
