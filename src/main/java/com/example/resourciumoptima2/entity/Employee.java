@@ -22,9 +22,8 @@ public class Employee {
 
     public Employee() {
     }
-    public Employee(String userName, String password) {
+    public Employee(String userName) {
         this.userName = userName;
-        this.password = password;
     }
 
     public Employee(String firstName, String lastName, String userName, String email, String password , String position) {

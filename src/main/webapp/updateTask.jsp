@@ -42,6 +42,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="ReservationServlet" class="nav-link px-0 text-white">
+                            <i class="bi bi-speedometer2"></i>
+                            <span class="ms-1 d-none d-sm-inline">Reservation</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="TasksServlet" class="nav-link px-0 text-white">
                             <i class="bi bi-list-task"></i>
                             <span class="ms-1 d-none d-sm-inline">Tasks</span>

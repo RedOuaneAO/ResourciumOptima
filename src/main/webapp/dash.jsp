@@ -50,6 +50,12 @@
                     <span class="ms-1 d-none d-sm-inline">Department</span>
                 </a>
             </li>
+            <li>
+                <a href="ReservationServlet" class="nav-link px-0 text-white">
+                    <i class="bi bi-speedometer2"></i>
+                    <span class="ms-1 d-none d-sm-inline">Reservation</span>
+                </a>
+            </li>
           <li>
             <a href="TasksServlet" class="nav-link px-0 text-white">
               <i class="bi bi-plus-circle"></i>
@@ -57,7 +63,7 @@
             </a>
           </li>
           <li>
-            <a href="equipments.jsp" class="nav-link px-0 text-white">
+            <a href="EquipmentServlet" class="nav-link px-0 text-white">
               <i class="bi bi-person-circle"></i>
               <span class="ms-1 d-none d-sm-inline">Equipment</span></a>
           </li>

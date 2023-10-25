@@ -46,6 +46,12 @@
             </a>
           </li>
           <li>
+            <a href="ReservationServlet" class="nav-link px-0 text-white">
+              <i class="bi bi-speedometer2"></i>
+              <span class="ms-1 d-none d-sm-inline">Reservation</span>
+            </a>
+          </li>
+          <li>
             <a href="TasksServlet" class="nav-link px-0 text-white">
               <i class="bi bi-list-task"></i>
               <span class="ms-1 d-none d-sm-inline">Tasks</span>
@@ -131,7 +137,7 @@
                           <td><p><%= task.getStatus() %></p></td>
                           <td>
                             <a href="TasksServlet?id=<%=task.getId()%>" class="btn btn-danger"> Delete</a>
-                            <a href="updateTask.jsp/?id=<%=task.getId()%>" class="btn btn-danger"> Update</a>
+                            <a href="updateTask.jsp?id=<%=task.getId()%>" class="btn btn-success"> Update</a>
                           </td>
                         </tr>
                         <%} } %>

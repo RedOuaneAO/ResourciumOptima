@@ -51,7 +51,6 @@ public class EmployeeRepo {
 
     public Object auth(Employee employee) {
         String userName = employee.getUserName();
-//        String password = employee.getPassword();
         EntityManager entityManager =entityManagerFactory.createEntityManager();
         try{
             entityManager.getTransaction().begin();
@@ -59,7 +58,6 @@ public class EmployeeRepo {
             query.setParameter("userName", userName);
             Object emp =query.getSingleResult();
             entityManager.getTransaction().commit();
-//            return Optional.ofNullable(emp);
             return emp;
         }catch (Exception e){
             if (entityManager.getTransaction().isActive()) {

@@ -16,6 +16,18 @@ public class Equipement {
     private Date buyingDate;
     private Date maintDate;
 
+
+    public Equipement(String name, String type, String state, Date buyingDate, Date maintDate) {
+        this.name = name;
+        this.type = type;
+        this.state = state;
+        this.buyingDate = buyingDate;
+        this.maintDate = maintDate;
+    }
+
+    public Equipement() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -62,5 +74,17 @@ public class Equipement {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Equipement{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", state='" + state + '\'' +
+                ", buyingDate=" + buyingDate +
+                ", maintDate=" + maintDate +
+                '}';
     }
 }

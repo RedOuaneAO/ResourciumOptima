@@ -53,10 +53,4 @@ public class TasksServlet extends HttpServlet {
         tasksService.addTask(task);
         response.sendRedirect(request.getContextPath() + "/TasksServlet");
     }
-    @Override
-    protected  void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
-        PrintWriter out= response.getWriter();
-        out.println(id);
-    }
 }

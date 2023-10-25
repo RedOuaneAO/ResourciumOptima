@@ -1,3 +1,6 @@
+<%@ page import="com.example.resourciumoptima2.entity.Equipement" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% if (session.getAttribute("userName") ==null){
   response.sendRedirect("login.jsp");
@@ -42,6 +45,12 @@
             </a>
           </li>
           <li>
+            <a href="ReservationServlet" class="nav-link px-0 text-white">
+              <i class="bi bi-speedometer2"></i>
+              <span class="ms-1 d-none d-sm-inline">Reservation</span>
+            </a>
+          </li>
+          <li>
             <a href="TasksServlet" class="nav-link px-0 text-white">
               <i class="bi bi-list-task"></i>
               <span class="ms-1 d-none d-sm-inline">Tasks</span>
@@ -67,70 +76,148 @@
     </div>
 
     <%--    -- -------------------------------content ----------------------------------------%>
+
+
     <div class="col py-3 overflow-x-hidden overflow-y-scroll" style="height: 100vh">
-      <%--     -- Content Wrapper ----%>
-      <div class="d-flex flex-column">
-        <%--     -- Main Content ----%>
-        <div>
-          <%--         -- Topbar ----%>
-          <nav class="navbar navbar-expand  mb-4 shadow">
-            <div>
-              <p class="fs-5 ms-4">Welcome <span> ${ sessionScope.userName } !</span></p>
-            </div>
-          </nav>
-          <%--          End of Topbar ---%>
-          <%--          Begin Page Content ----%>
-          <div class="container-fluid">
-            <%--             Page Heading --%>
-            <div class="d-flex justify-content-between">
-              <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h3 class="mb-0 text-secondary">Tasks</h3>
+        <%--     -- Content Wrapper ----%>
+        <div class="d-flex flex-column">
+          <%--     -- Main Content ----%>
+          <div>
+            <%--         -- Topbar ----%>
+            <nav class="navbar navbar-expand  mb-4 shadow">
+              <div>
+                <p class="fs-5 ms-4">Welcome <span> ${ sessionScope.userName } !</span></p>
               </div>
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Add Equipment
-              </button>
-            </div>
-            <div class="row">
-              <div class=" d-flex justify-content-center ">
-                <div class="card shadow mb-4 col-8">
-                  <%--                  Card Header - Dropdown ----%>
-                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Equipments</h6>
-                  </div>
-                  <%--                  -- Card Body ----%>
-                  <div class="card-body">
-                    <div class="table-responsive">
-                      <table class="table table-striped border">
-                        <thead class="bg-secondary bg-opacity-25">
-                        <tr>
-                          <th scope="col">Name</th>
-                          <th scope="col">Type</th>
-                          <th scope="col">State</th>
-                          <th scope="col">reserved by</th>
-                          <th scope="col">buyingDate</th>
-                          <th scope="col">maintDate</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                          <td><p></p></td>
-                          <td><p></p></td>
-                          <td><p></p></td>
-                          <td><p></p></td>
-                          <td><p></p></td>
-                          <td></td>
-                        </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
+            </nav>
+            <%--          End of Topbar ---%>
+            <%--          Begin Page Content ----%>
+            <div class="container-fluid">
+              <%--             Page Heading --%>
+              <div class="d-flex justify-content-between">
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                  <h3 class="mb-0 text-secondary">Equipment</h3>
                 </div>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Add Equipment
+                </button>
               </div>
-            </div>
+
+          <div class=" mt-4 d-flex justify-content-evenly flex-wrap" id="cards">
+            <% if (request.getAttribute("equipmentList") != null) {
+                List<Equipement> equipmentList = (List<Equipement>) request.getAttribute("equipmentList");
+              SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyy-MM-dd");
+                for (Equipement equipement : equipmentList) {%>
+                  <a href="/apartmentDetails/{{$apartment->id}}" class="text-decoration-none">
+                    <div class=" mb-4 shadow rounded">
+                      <div class="card" style="width: 15rem;">
+                        <div id="" class="">
+                          <div class="">
+                            <div class="">
+                              <img src="images/home.png"  class="card-img-top" alt="">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card-body">
+                          <div class="d-flex justify-content-between">
+                            <h5 class="card-title fw-bold text-uppercase"  style="font-size: 18px;"><%= equipement.getName()%></h5>
+                          </div>
+                          <div class="d-flex flex-column">
+                            <p class="card-text fw-bold mb-0" style="font-size: 14px">Type : <span class="text-secondary"><%= equipement.getType()%> </span></p>
+                            <p>State : <span class="fw-bold me-2"><%= equipement.getState()%></span></p>
+                            <p class="card-text text-secondary my-2" style="font-size: 14px"><sapan>Buying Date</sapan> <%= simpleDateFormat.format(equipement.getBuyingDate()) %></p>
+                            <div class="d-flex justify-content-between">
+                              <form method="post" action="ReservationServlet">
+                                <input type="text" value="<%= equipement.getId()%>" name="equipmentId" hidden>
+                                  <button class="btn btn-success " type="submit">Reserve</button>
+<%--                                   <a href="ReservationServlet?id=<%= equipement.getId()%>" class="btn btn-success">Reserve</a>--%>
+                              </form>
+                             <a href="EquipmentServlet?id=<%= equipement.getId()%>" class="btn btn-danger">Delete</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+            <%} } %>
           </div>
-        </div>
-      </div>
     </div>
+
+
+
+
+
+
+<%--    <div class="col py-3 overflow-x-hidden overflow-y-scroll" style="height: 100vh">--%>
+<%--      &lt;%&ndash;     -- Content Wrapper --&ndash;%&gt;--%>
+<%--      <div class="d-flex flex-column">--%>
+<%--        &lt;%&ndash;     -- Main Content --&ndash;%&gt;--%>
+<%--        <div>--%>
+<%--          &lt;%&ndash;         -- Topbar --&ndash;%&gt;--%>
+<%--          <nav class="navbar navbar-expand  mb-4 shadow">--%>
+<%--            <div>--%>
+<%--              <p class="fs-5 ms-4">Welcome <span> ${ sessionScope.userName } !</span></p>--%>
+<%--            </div>--%>
+<%--          </nav>--%>
+<%--          &lt;%&ndash;          End of Topbar -&ndash;%&gt;--%>
+<%--          &lt;%&ndash;          Begin Page Content --&ndash;%&gt;--%>
+<%--          <div class="container-fluid">--%>
+<%--            &lt;%&ndash;             Page Heading &ndash;%&gt;--%>
+<%--            <div class="d-flex justify-content-between">--%>
+<%--              <div class="d-sm-flex align-items-center justify-content-between mb-4">--%>
+<%--                <h3 class="mb-0 text-secondary">Tasks</h3>--%>
+<%--              </div>--%>
+<%--              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">--%>
+<%--                Add Equipment--%>
+<%--              </button>--%>
+<%--            </div>--%>
+<%--            <div class="row">--%>
+<%--              <div class=" d-flex justify-content-center ">--%>
+<%--                <div class="card shadow mb-4 col-8">--%>
+<%--                  &lt;%&ndash;                  Card Header - Dropdown --&ndash;%&gt;--%>
+<%--                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">--%>
+<%--                    <h6 class="m-0 font-weight-bold text-primary">Equipments</h6>--%>
+<%--                  </div>--%>
+<%--                  &lt;%&ndash;                  -- Card Body --&ndash;%&gt;--%>
+<%--                  <div class="card-body">--%>
+<%--                    <div class="table-responsive">--%>
+<%--                      <table class="table table-striped border">--%>
+<%--                        <thead class="bg-secondary bg-opacity-25">--%>
+<%--                        <tr>--%>
+<%--                          <th scope="col">Name</th>--%>
+<%--                          <th scope="col">Type</th>--%>
+<%--                          <th scope="col">State</th>--%>
+<%--&lt;%&ndash;                          <th scope="col">reserved by</th>&ndash;%&gt;--%>
+<%--                          <th scope="col">buyingDate</th>--%>
+<%--                          <th scope="col">maintDate</th>--%>
+<%--                          <th scope="col">Action</th>--%>
+<%--                        </tr>--%>
+<%--                        </thead>--%>
+<%--                        <tbody>--%>
+<%--                        <% if (request.getAttribute("equipmentList") != null) {--%>
+<%--                          List<Equipement> equipmentList = (List<Equipement>) request.getAttribute("equipmentList");--%>
+<%--                          for (Equipement equipement : equipmentList) {%>--%>
+<%--                          <tr>--%>
+<%--                            <td><p><%= equipement.getName() %></p></td>--%>
+<%--                            <td><p><%= equipement.getType()%></p></td>--%>
+<%--                            <td><p><%= equipement.getState()%></p></td>--%>
+<%--                            <td><p><%= equipement.getBuyingDate()%></p></td>--%>
+<%--                            <td><p><%= equipement.getMaintDate()%></p></td>--%>
+<%--                            <td>--%>
+<%--                              <a href="EquipmentServlet?id=<%=equipement.getId()%>" class="btn btn-danger"> Delete</a>--%>
+<%--                            </td>--%>
+<%--                          </tr>--%>
+<%--                        <%} } %>--%>
+<%--                        </tbody>--%>
+<%--                      </table>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--        </div>--%>
+<%--      </div>--%>
+<%--    </div>--%>
   </div>
 </div>
 <%--modal--%>
@@ -142,8 +229,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       <form>
-         <form action="LoginServlet" method="post">
+         <form action="EquipmentServlet" method="post">
            <div class="mb-4">
              <label class="form-label">Name</label>
              <input type="text" class="form-control" name="name" required>
@@ -156,19 +242,20 @@
              <label class="form-label">State</label>
              <input type="text" class="form-control" name="state" required>
            </div>
-<%--           <div class="mb-4">--%>
-<%--             <label class="form-label">Type</label>--%>
-<%--             <input type="text" class="form-control" name="type" required>--%>
-<%--           </div>--%>
-
-           <button type="submit" class="btn btn-primary">Add</button>
+           <div class="mb-4">
+             <label class="form-label">Buying Date</label>
+             <input type="date" class="form-control" name="buyDate" required>
+           </div>
+           <div class="mb-4">
+             <label class="form-label">Maintenance Date</label>
+             <input type="date" class="form-control" name="maintDate" required>
+           </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Add</button>
+          </div>
          </form>
-       </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
     </div>
   </div>
 </div>
