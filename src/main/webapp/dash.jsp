@@ -1,12 +1,5 @@
 <%@ page import="com.example.resourciumoptima2.entity.Employee" %>
 <%@ page import="java.util.List" %>
-<%--<% if (request.getAttribute("message") != null) { %>--%>
-<%--&lt;%&ndash;<div class="w-100">&ndash;%&gt;--%>
-<%--<h2 class="success-message text-danger d-flex justify-content-center">--%>
-<%--    <%= request.getAttribute("message") %>--%>
-<%--</h2>--%>
-<%--&lt;%&ndash;</div>&ndash;%&gt;--%>
-<%--<% } %>--%>
 <% if (session.getAttribute("userName") ==null){
     response.sendRedirect("login.jsp");
 }%>
@@ -15,6 +8,7 @@
 <head>
     <title>Title</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
 </head>
 <body>
 <div class="container-fluid">
@@ -40,13 +34,13 @@
           </li>
           <li>
             <a href="EmployeesServlet" class="nav-link px-0 text-white">
-              <i class="bi bi-speedometer2"></i>
+                <i class="bi bi-people-fill"></i>
               <span class="ms-1 d-none d-sm-inline">Employees</span>
             </a>
           </li>
             <li>
                 <a href="DepartmentServlet" class="nav-link px-0 text-white">
-                    <i class="bi bi-speedometer2"></i>
+                    <i class="bi bi-house-door"></i>
                     <span class="ms-1 d-none d-sm-inline">Department</span>
                 </a>
             </li>
@@ -64,11 +58,11 @@
           </li>
           <li>
             <a href="EquipmentServlet" class="nav-link px-0 text-white">
-              <i class="bi bi-person-circle"></i>
-              <span class="ms-1 d-none d-sm-inline">Equipment</span></a>
+                <i class="bi bi-nut"></i>
+                <span class="ms-1 d-none d-sm-inline">Equipment</span></a>
           </li>
           <li>
-            <a href="profile.jsp" class="nav-link px-0 text-white">
+            <a href="EmployeesServlet?userName=${ sessionScope.userName }" class="nav-link px-0 text-white">
               <i class="bi bi-person-circle"></i>
               <span class="ms-1 d-none d-sm-inline">Profile</span></a>
           </li>

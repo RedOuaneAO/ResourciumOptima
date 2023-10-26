@@ -40,4 +40,8 @@ public class ReservationService {
     public void makeReservation(Reservation reservation1) {
         reservationRepo.addReservation(reservation1);
     }
+
+    public Reservation getReservationById(int id) {
+        return reservationRepo.getReservById(id);
+    }
 }

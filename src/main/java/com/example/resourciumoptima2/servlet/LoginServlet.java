@@ -28,7 +28,6 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         Employee employee =new Employee(userName);
         Employee result =(Employee) employeeService.userLogin(employee);
-//        request.setAttribute("userData" , result);
         HttpSession session = request.getSession();
         if (result==null){
             session.setAttribute("error" , "the userName or password is not correct");

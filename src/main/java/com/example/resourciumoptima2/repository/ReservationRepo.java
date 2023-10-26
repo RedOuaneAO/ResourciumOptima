@@ -98,4 +98,11 @@ public class ReservationRepo {
             entityManager.close();
         }
     }
+
+    public Reservation getReservById(int id) {
+        EntityManager entityManager =entityManagerFactory.createEntityManager();
+        Reservation reservation =entityManager.find(Reservation.class,id);
+        return reservation;
+    }
+
 }

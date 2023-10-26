@@ -1,12 +1,5 @@
 <%@ page import="com.example.resourciumoptima2.entity.Employee" %>
 <%@ page import="java.util.List" %>
-<%--<% if (request.getAttribute("message") != null) { %>--%>
-<%--&lt;%&ndash;<div class="w-100">&ndash;%&gt;--%>
-<%--<h2 class="success-message text-danger d-flex justify-content-center">--%>
-<%--    <%= request.getAttribute("message") %>--%>
-<%--</h2>--%>
-<%--&lt;%&ndash;</div>&ndash;%&gt;--%>
-<%--<% } %>--%>
 <% if (session.getAttribute("userName") ==null){
     response.sendRedirect("login.jsp");
 }%>
@@ -15,6 +8,7 @@
 <head>
     <title>Employees</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
 </head>
 <body>
 <div class="container-fluid">
@@ -68,12 +62,12 @@
                             <span class="ms-1 d-none d-sm-inline">Equipment</span></a>
                     </li>
                     <li>
-                        <a href="profile.jsp" class="nav-link px-0 text-white">
+                        <a href="EmployeesServlet?userName=${ sessionScope.userName }" class="nav-link px-0 text-white">
                             <i class="bi bi-person-circle"></i>
                             <span class="ms-1 d-none d-sm-inline">Profile</span></a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-0 text-white">
+                        <a href="LogoutServlet" class="nav-link px-0 text-white">
                             <i class="bi bi-box-arrow-left"></i>
                             <span class="ms-1 d-none d-sm-inline">Logout</span> </a>
                     </li>

@@ -37,28 +37,38 @@ public class ReservationServlet extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String equipmentId = request.getParameter("equipmentId");
-        String reservationDate = request.getParameter("resrvDate");
-        String returnnDate = request.getParameter("returDate");
-        HttpSession session = request.getSession();
-        String userName = (String) session.getAttribute("userName");
-        Employee employee =new Employee(userName);
-        Employee userData =(Employee) reservation.getAuthData(employee);
-        employee.setId(userData.getId());
-        Equipement equipement =new Equipement();
-        equipement.setId(Long.valueOf(equipmentId));
-        Date  reservationDate2= null;
-        Date  returnnDate2= null;
-        SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyy-MM-dd");
-        try{
-            reservationDate2 = simpleDateFormat.parse(reservationDate);
-            returnnDate2 = simpleDateFormat.parse(returnnDate);
-        }catch (ParseException e){
-            e.printStackTrace();
+
+        String resrvationId = request.getParameter("id");
+        if(resrvationId !=null){
+            int id = Integer.parseInt(resrvationId);
+               Reservation reservationData = reservation.getReservationById(id);
+                request.setAttribute("reservationData", reservationData);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("updateReservation.jsp");
+                requestDispatcher.forward(request,response);
+        }else{
+            String equipmentId = request.getParameter("equipmentId");
+            String reservationDate = request.getParameter("resrvDate");
+            String returnnDate = request.getParameter("returDate");
+            HttpSession session = request.getSession();
+            String userName = (String) session.getAttribute("userName");
+            Employee employee =new Employee(userName);
+            Employee userData =(Employee) reservation.getAuthData(employee);
+            employee.setId(userData.getId());
+            Equipement equipement =new Equipement();
+            equipement.setId(Long.valueOf(equipmentId));
+            Date  reservationDate2= null;
+            Date  returnnDate2= null;
+            SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyy-MM-dd");
+            try{
+                reservationDate2 = simpleDateFormat.parse(reservationDate);
+                returnnDate2 = simpleDateFormat.parse(returnnDate);
+            }catch (ParseException e){
+                e.printStackTrace();
+            }
+            Reservation reservation1 = new Reservation(reservationDate2,returnnDate2,employee,equipement);
+            reservation.makeReservation(reservation1);
+            response.sendRedirect(request.getContextPath() + "/ReservationServlet");
         }
-        Reservation reservation1 = new Reservation(reservationDate2,returnnDate2,employee,equipement);
-        reservation.makeReservation(reservation1);
-        response.sendRedirect(request.getContextPath() + "/ReservationServlet");
 
 
 //        response.getWriter().println(reservation1);

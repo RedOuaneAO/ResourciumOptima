@@ -1,3 +1,5 @@
+<%@ page import="com.example.resourciumoptima2.entity.Employee" %>
+<%@ page import="java.util.List" %>
 <% if (session.getAttribute("userName") ==null){
     response.sendRedirect("login.jsp");
 }%>
@@ -6,6 +8,7 @@
 <head>
     <title>Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
 </head>
 <body>
 <div class="container-fluid">
@@ -59,12 +62,12 @@
                             <span class="ms-1 d-none d-sm-inline">Equipment</span></a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-0 text-white">
+                        <a href="EmployeesServlet?userName=${ sessionScope.userName }" class="nav-link px-0 text-white">
                             <i class="bi bi-person-circle"></i>
                             <span class="ms-1 d-none d-sm-inline">Profile</span></a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-0 text-white">
+                        <a href="LogoutServlet" class="nav-link px-0 text-white">
                             <i class="bi bi-box-arrow-left"></i>
                             <span class="ms-1 d-none d-sm-inline">Logout</span> </a>
                     </li>
@@ -76,33 +79,33 @@
                 <div class="col mt-3 py-3" style="height: 100vh">
                     <div class="container shadow rounded bg-white border">
                         <h5 class="fw-bold mt-3 ms-3">Profile</h5>
-                        <form action="updateProfile/{{Auth::user()->id}}" method="POST" enctype="multipart/form-data">
+                        <form action="" method="POST">
                             <div class="d-md-flex justify-content-evenly my-5">
                                 <div class="col-md-5 shadow border rounded">
                                     <div class="p-3 pt-5">
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <h4 class="text-right">Profile Settings</h4>
                                         </div>
+                                    <% if (request.getAttribute("employeeData") != null) {
+                                        Employee EmployeeData = (Employee) request.getAttribute("employeeData");
+                                    %>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>User name</label>
-                                                <input type="text" name="name" class="form-control" value="">
+                                                <input type="text" name="name" class="form-control" value="<%=EmployeeData.getUserName()%>">
                                             </div>
                                             <div class="col-md-6">
                                                 <label>Position</label>
-                                                <select class="form-select" name="position">
-                                                    <option value="" disabled selected>Select</option>
-                                                    <option value="" ></option>
-                                                    <option value=""></option>
-                                                </select>
+                                                <input type="text" name="position" class="form-control" value="<%=EmployeeData.getPosition()%>">
                                             </div>
                                         </div><br>
                                         <div class="row">
-                                            <div class="col-md-6"><label>First Name</label><input type="text" name="firstNAme" class="form-control" value=""></div>
-                                            <div class="col-md-6"><label>Last Name</label><input type="text"  name="lastName"  class="form-control"/></div>
+                                            <div class="col-md-6"><label>First Name</label><input type="text" name="firstNAme" class="form-control" value="<%=EmployeeData.getFirstName()%>"></div>
+                                            <div class="col-md-6"><label>Last Name</label><input type="text"  name="lastName"  class="form-control" value="<%=EmployeeData.getLastName()%>"/></div>
                                         </div><br>
-                                        <div class="col-md-12"><label>Email</label><input type="email" name="email" class="form-control" value=""></div>
+                                        <div class="col-md-12"><label>Email</label><input type="email" name="email" class="form-control" value="<%=EmployeeData.getEmail()%>"></div>
                                     </div>
+                                    <%}%>
                                     <div class="my-2 text-center">
                                         <button class="btn btn-outline-primary" type="submit">Save Changes</button>
                                     </div>

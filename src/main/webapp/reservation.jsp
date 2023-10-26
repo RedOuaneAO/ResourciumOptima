@@ -2,14 +2,15 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.resourciumoptima2.entity.Reservation" %>
 <%@ page import="com.example.resourciumoptima2.entity.Equipement" %>
-<%--<% if (session.getAttribute("userName") ==null){--%>
-<%--    response.sendRedirect("login.jsp");--%>
-<%--}%>--%>
+<% if (session.getAttribute("userName") ==null){
+    response.sendRedirect("login.jsp");
+}%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Reservation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
 </head>
 <body>
 <div class="container-fluid">
@@ -63,12 +64,12 @@
                             <span class="ms-1 d-none d-sm-inline">Equipment</span></a>
                     </li>
                     <li>
-                        <a href="profile.jsp" class="nav-link px-0 text-white">
+                        <a href="EmployeesServlet?userName=${ sessionScope.userName }" class="nav-link px-0 text-white">
                             <i class="bi bi-person-circle"></i>
                             <span class="ms-1 d-none d-sm-inline">Profile</span></a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-0 text-white">
+                        <a href="LogoutServlet" class="nav-link px-0 text-white">
                             <i class="bi bi-box-arrow-left"></i>
                             <span class="ms-1 d-none d-sm-inline">Logout</span> </a>
                     </li>
@@ -105,7 +106,7 @@
                                 <div class="card shadow mb-4 col-8">
                                     <%--                  Card Header - Dropdown ----%>
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Department</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Reservation</h6>
                                     </div>
                                     <%--                  -- Card Body ----%>
                                     <div class="card-body">
@@ -133,6 +134,11 @@
                                                     <td><p><%= res.getEndDate()%></p></td>
                                                     <td>
                                                         <a href="ReservationServlet?id=<%=res.getId()%>" class="btn btn-danger"> Delete</a>
+                                                        <form action="ReservationServlet" method="post">
+                                                            <input type="text" value="<%=res.getId()%>" name="id" hidden>
+                                                            <button type="submit" class="btn btn-success">Update</button>
+                                                        </form>
+<%--                                                        <a href="ReservationServlet?id=<%=res.getId()%>&&equiName=<%=res.getEquipement().getName()%>" class="btn btn-success"> Update</a>--%>
                                                     </td>
                                                 </tr>
                                                 <%} } %>
