@@ -39,12 +39,37 @@ public class ReservationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String resrvationId = request.getParameter("id");
+        String reservDate =request.getParameter("reservDate");
         if(resrvationId !=null){
             int id = Integer.parseInt(resrvationId);
-               Reservation reservationData = reservation.getReservationById(id);
-                request.setAttribute("reservationData", reservationData);
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("updateReservation.jsp");
-                requestDispatcher.forward(request,response);
+                Reservation reservationData = reservation.getReservationById(id);
+                request.getSession().setAttribute("reservationData" , reservationData);
+                response.sendRedirect("updateReservation.jsp");
+        }else if(reservDate != null ) {
+            String returnDate =request.getParameter("returnDate");
+            String equipmentId = request.getParameter("equipment");
+            Long resId = Long.valueOf(request.getParameter("resId"));
+            System.out.println("first data : " + reservDate + " " + returnDate + " " + equipmentId);
+            SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyy-MM-dd");
+            HttpSession session = request.getSession();
+            String userName = (String) session.getAttribute("userName");
+            Employee employee =new Employee(userName);
+            Employee userData =(Employee) reservation.getAuthData(employee);
+            employee.setId(userData.getId());
+            Equipement equipement =new Equipement();
+            equipement.setId(Long.valueOf(equipmentId));
+            Date  reservationDate= null;
+            Date  returnnDate= null;
+            try{
+                reservationDate = simpleDateFormat.parse(reservDate);
+                returnnDate = simpleDateFormat.parse(returnDate);
+            }catch (ParseException e){
+                e.printStackTrace();
+            }
+            Reservation reservation1 = new Reservation(reservationDate,returnnDate,employee,equipement);
+            reservation1.setId(resId);
+            reservation.updateRes(reservation1);
+            response.sendRedirect(request.getContextPath() + "/ReservationServlet");
         }else{
             String equipmentId = request.getParameter("equipmentId");
             String reservationDate = request.getParameter("resrvDate");
@@ -69,8 +94,6 @@ public class ReservationServlet extends HttpServlet {
             reservation.makeReservation(reservation1);
             response.sendRedirect(request.getContextPath() + "/ReservationServlet");
         }
-
-
 //        response.getWriter().println(reservation1);
     }
 }

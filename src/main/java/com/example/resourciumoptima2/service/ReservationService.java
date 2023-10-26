@@ -44,4 +44,8 @@ public class ReservationService {
     public Reservation getReservationById(int id) {
         return reservationRepo.getReservById(id);
     }
+
+    public void updateRes(Reservation reservation1) {
+        reservationRepo.updateReservation(reservation1);
+    }
 }

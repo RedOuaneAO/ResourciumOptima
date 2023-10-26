@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.resourciumoptima2.entity.Reservation" %>
 <%@ page import="com.example.resourciumoptima2.entity.Equipement" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <% if (session.getAttribute("userName") ==null){
     response.sendRedirect("login.jsp");
 }%>
@@ -125,19 +126,22 @@
                                                 <tbody>
                                                 <% if (request.getAttribute("reservationList") != null) {
                                                     List<Reservation> reservationList = (List<Reservation>) request.getAttribute("reservationList");
+                                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                                                     for (Reservation res:reservationList) {%>
                                                 <tr>
                                                     <td><p><%= res.getEquipement().getName() %></p></td>
                                                     <td><p><%= res.getEquipement().getType()%></p></td>
                                                     <td><p><%= res.getEmployee().getUserName()%></p></td>
-                                                    <td><p><%= res.getStartDate()%></p></td>
-                                                    <td><p><%= res.getEndDate()%></p></td>
+                                                    <td><p><%=dateFormat.format(res.getStartDate())%></p></td>
+                                                    <td><p><%=dateFormat.format(res.getEndDate())%></p></td>
                                                     <td>
-                                                        <a href="ReservationServlet?id=<%=res.getId()%>" class="btn btn-danger"> Delete</a>
-                                                        <form action="ReservationServlet" method="post">
-                                                            <input type="text" value="<%=res.getId()%>" name="id" hidden>
-                                                            <button type="submit" class="btn btn-success">Update</button>
-                                                        </form>
+                                                        <div class="d-flex justify-content-evenly">
+                                                            <a href="ReservationServlet?id=<%=res.getId()%>" class="btn btn-danger"> Delete</a>
+                                                            <form action="ReservationServlet" method="post">
+                                                                <input type="text" value="<%=res.getId()%>" name="id" hidden>
+                                                                <button type="submit" class="btn btn-success">Update</button>
+                                                            </form>
+                                                        </div>
 <%--                                                        <a href="ReservationServlet?id=<%=res.getId()%>&&equiName=<%=res.getEquipement().getName()%>" class="btn btn-success"> Update</a>--%>
                                                     </td>
                                                 </tr>

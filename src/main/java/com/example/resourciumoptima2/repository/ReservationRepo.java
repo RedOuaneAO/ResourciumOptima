@@ -105,4 +105,20 @@ public class ReservationRepo {
         return reservation;
     }
 
+    public void updateReservation(Reservation reservation1) {
+        EntityManager entityManager =entityManagerFactory.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+//            Reservation res = entityManager.find(Reservation.class ,reservation1.getId());
+            entityManager.merge(reservation1);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+    }
 }

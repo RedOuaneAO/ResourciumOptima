@@ -82,10 +82,12 @@
       <div class="container shadow rounded bg-white border">
         <div class="modal-content">
           <div class="modal-body">
-            <% Reservation reservation = (Reservation) request.getAttribute("reservationData");
+            <%
+              Reservation reservation = (Reservation) request.getSession().getAttribute("reservationData");
               SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyy-MM-dd");
             %>
-            <form action="TasksServlet" method="post">
+            <form action="ReservationServlet" method="post">
+              <input type="text" hidden value="<%= reservation.getId()%>" name="resId">
                 <div class="mb-4">
                   <label class="form-label">Reservation Date</label>
                   <input type="date" class="form-control" value="<%=simpleDateFormat.format(reservation.getStartDate()) %>" name="reservDate" required>

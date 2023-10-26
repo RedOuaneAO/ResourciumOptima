@@ -25,6 +25,12 @@ public class Reservation {
         this.equipement = equipement;
     }
 
+    public Reservation(Date startDate, Date endDate, Equipement equipement) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.equipement = equipement;
+    }
+
     public Reservation() {
     }
 
