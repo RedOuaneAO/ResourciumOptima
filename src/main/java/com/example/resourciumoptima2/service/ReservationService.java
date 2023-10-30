@@ -33,7 +33,7 @@ public class ReservationService {
         return employeeRepo.auth(employee);
     }
 
-    public List<Equipement> getAllReservation() {
+    public List<Equipement> getAllEquipment() {
         return reservationRepo.getEquipments();
     }
 

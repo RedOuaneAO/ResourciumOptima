@@ -10,12 +10,12 @@ import jakarta.persistence.Query;
 import java.util.List;
 
 public class EquipmentRepo {
+
+    private  EntityManagerFactory entityManagerFactory;
+
     public EquipmentRepo(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
     }
-
-    private final EntityManagerFactory entityManagerFactory;
-
 
     
     public void addEquipment(Equipement equipement){

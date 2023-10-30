@@ -26,10 +26,15 @@
                     </div>
                 </div>
                 <ul class="nav flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
-                    <li class="nav-item">
-                        <a href="dash.jsp" class="nav-link px-0 text-white">
-                            <i class="bi bi-house"></i>
-                            <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                    <li>
+                        <a href="EquipmentServlet" class="nav-link px-0 text-white">
+                            <i class="bi bi-nut"></i>
+                            <span class="ms-1 d-none d-sm-inline">Equipment</span></a>
+                    </li>
+                    <li>
+                        <a href="ReservationServlet" class="nav-link px-0 text-white">
+                            <i class="bi bi-speedometer2"></i>
+                            <span class="ms-1 d-none d-sm-inline">Reservation</span>
                         </a>
                     </li>
                     <li>
@@ -39,21 +44,16 @@
                         </a>
                     </li>
                     <li>
-                        <a href="DepartmentServlet" class="nav-link px-0 text-white">
-                            <i class="bi bi-house-door"></i>
-                            <span class="ms-1 d-none d-sm-inline">Department</span>
-                        </a>
-                    </li>
-                    <li>
                         <a href="TasksServlet" class="nav-link px-0 text-white">
                             <i class="bi bi-list-task"></i>
                             <span class="ms-1 d-none d-sm-inline">Tasks</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-0 text-white">
-                            <i class="bi bi-nut"></i>
-                            <span class="ms-1 d-none d-sm-inline">Equipment</span></a>
+                        <a href="DepartmentServlet" class="nav-link px-0 text-white">
+                            <i class="bi bi-house-door"></i>
+                            <span class="ms-1 d-none d-sm-inline">Department</span>
+                        </a>
                     </li>
                     <li>
                         <a href="EmployeesServlet?userName=${ sessionScope.userName }" class="nav-link px-0 text-white">

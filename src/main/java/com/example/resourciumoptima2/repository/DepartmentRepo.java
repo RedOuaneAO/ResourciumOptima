@@ -9,7 +9,7 @@ import jakarta.persistence.Query;
 import java.util.List;
 
 public class DepartmentRepo {
-    private final EntityManagerFactory entityManagerFactory;
+    private  EntityManagerFactory entityManagerFactory;
 
     public DepartmentRepo(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;

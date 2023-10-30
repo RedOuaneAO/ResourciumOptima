@@ -27,10 +27,15 @@
           </div>
         </div>
         <ul class="nav flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
-          <li class="nav-item">
-            <a href="dash.jsp" class="nav-link px-0 text-white">
-              <i class="bi bi-house"></i>
-              <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+          <li>
+            <a href="EquipmentServlet" class="nav-link px-0 text-white">
+              <i class="bi bi-nut"></i>
+              <span class="ms-1 d-none d-sm-inline">Equipment</span></a>
+          </li>
+          <li>
+            <a href="ReservationServlet" class="nav-link px-0 text-white">
+              <i class="bi bi-speedometer2"></i>
+              <span class="ms-1 d-none d-sm-inline">Reservation</span>
             </a>
           </li>
           <li>
@@ -40,27 +45,16 @@
             </a>
           </li>
           <li>
-            <a href="DepartmentServlet" class="nav-link px-0 text-white">
-              <i class="bi bi-house-door"></i>
-              <span class="ms-1 d-none d-sm-inline">Department</span>
-            </a>
-          </li>
-          <li>
-            <a href="ReservationServlet" class="nav-link px-0 text-white">
-              <i class="bi bi-speedometer2"></i>
-              <span class="ms-1 d-none d-sm-inline">Reservation</span>
-            </a>
-          </li>
-          <li>
             <a href="TasksServlet" class="nav-link px-0 text-white">
               <i class="bi bi-list-task"></i>
               <span class="ms-1 d-none d-sm-inline">Tasks</span>
             </a>
           </li>
           <li>
-            <a href="#" class="nav-link px-0 text-white">
-              <i class="bi bi-nut"></i>
-              <span class="ms-1 d-none d-sm-inline">Equipment</span></a>
+            <a href="DepartmentServlet" class="nav-link px-0 text-white">
+              <i class="bi bi-house-door"></i>
+              <span class="ms-1 d-none d-sm-inline">Department</span>
+            </a>
           </li>
           <li>
             <a href="EmployeesServlet?userName=${ sessionScope.userName }" class="nav-link px-0 text-white">
@@ -108,18 +102,13 @@
                 List<Equipement> equipmentList = (List<Equipement>) request.getAttribute("equipmentList");
               SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyy-MM-dd");
                 for (Equipement equipement : equipmentList) {%>
-                  <a href="/apartmentDetails/{{$apartment->id}}" class="text-decoration-none">
-                    <div class=" mb-4 shadow rounded">
-                      <div class="card" style="width: 15rem;">
-                        <div id="" class="">
+                    <div class="mb-4 shadow rounded">
+                      <div class="card" style="width:17rem;">
                           <div class="">
-                            <div class="">
-                              <img src="images/home.png"  class="card-img-top" alt="">
-                            </div>
+                            <img src="images/home.png"  class="card-img-top" alt="">
                           </div>
-                        </div>
                         <div class="card-body">
-                          <div class="d-flex justify-content-between">
+                          <div class="d-flex justify-content-center">
                             <h5 class="card-title fw-bold text-uppercase"  style="font-size: 18px;"><%= equipement.getName()%></h5>
                           </div>
                           <div class="d-flex flex-column">
@@ -127,14 +116,13 @@
                             <p>State : <span class="fw-bold me-2"><%= equipement.getState()%></span></p>
                             <p class="card-text text-secondary my-2" style="font-size: 14px"><sapan>Buying Date</sapan> <%= simpleDateFormat.format(equipement.getBuyingDate()) %></p>
                             <div class="d-flex justify-content-between">
-                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reserve">Reserve</button>
+<%--                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reserve">Reserve</button>--%>
                               <a href="EquipmentServlet?id=<%= equipement.getId()%>" class="btn btn-danger">Delete</a>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </a>
             <%} } %>
           </div>
     </div>
@@ -179,7 +167,6 @@
     </div>
   </div>
 </div>
-
 
 <%--          reservation modal--%>
 <%--          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reserve">Reserve</button>--%>

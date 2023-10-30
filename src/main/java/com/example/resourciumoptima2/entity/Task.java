@@ -18,11 +18,14 @@ public class Task {
     private Employee employee;
     private String status;
 
-    public Task(String name, String description, Date limitDate,String priority) {
+    public Task(String name, String description, Date limitDate,String priority ,String status , Employee employee) {
         this.name = name;
         this.description = description;
         this.limitDate = limitDate;
         this.priority = priority;
+        this.status = status;
+        this.employee = employee;
+
     }
 
     public Task() {

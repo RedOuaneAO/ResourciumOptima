@@ -35,6 +35,15 @@ public class Employee {
         this.position = position;
     }
 
+    public Employee(Long id, String firstName, String lastName, String userName, String email ,String position) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.email = email;
+        this.position=position;
+    }
+
     public String getEmail() {
         return email;
     }

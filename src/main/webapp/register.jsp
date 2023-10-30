@@ -10,6 +10,11 @@
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-6 ">
+                <% if(session.getAttribute("errorMsg") != null){%>
+                <div class="alert alert-danger" role="alert">
+                    <p><strong>!!Error</strong> ${sessionScope.errorMsg}</p>
+                </div>
+                <%}%>
                 <div class="bg-dark text-white rounded">
                     <div class="card-body p-5 text-center">
                         <div class="mb-4"><h3>Register</h3></div>

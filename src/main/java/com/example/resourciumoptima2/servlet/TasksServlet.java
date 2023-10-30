@@ -1,6 +1,7 @@
 package com.example.resourciumoptima2.servlet;
 
 import com.example.resourciumoptima2.entity.Departement;
+import com.example.resourciumoptima2.entity.Employee;
 import com.example.resourciumoptima2.entity.Task;
 import com.example.resourciumoptima2.service.EmployeeService;
 import com.example.resourciumoptima2.service.TasksService;
@@ -24,9 +25,12 @@ public class TasksServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String taskId = request.getParameter("id");
+        Object employees = tasksService.getEmployees();
+        request.getSession().setAttribute("employees" , employees);
         if(taskId !=null){
             int id = Integer.parseInt(taskId);
             tasksService.deleteTask(id);
+            request.getSession().setAttribute("Msg" , "the Task has Been Deleted ");
             response.sendRedirect(request.getContextPath() + "/TasksServlet");
         }else{
             List<Task> taskList = tasksService.getAllTasks();
@@ -42,14 +46,18 @@ public class TasksServlet extends HttpServlet {
            String description = request.getParameter("description");
            String date = request.getParameter("limitDate");
            String priority = request.getParameter("priority");
+           String status= request.getParameter("status");
+           Long AssignTo= Long.valueOf(request.getParameter("AssignTo"));
+            Employee employee = new Employee();
+            employee.setId(AssignTo);
             Date limitDate = null;
             SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyy-MM-dd");
             try{
-            limitDate = simpleDateFormat.parse(date);
+                limitDate = simpleDateFormat.parse(date);
             }catch (ParseException e){
                 e.printStackTrace();
             }
-            Task task =new Task(name , description ,limitDate , priority);
+            Task task =new Task(name , description ,limitDate , priority , status , employee);
             tasksService.addTask(task);
             response.sendRedirect(request.getContextPath() + "/TasksServlet");
     }

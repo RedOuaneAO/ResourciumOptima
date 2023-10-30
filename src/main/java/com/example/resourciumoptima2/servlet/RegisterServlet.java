@@ -13,30 +13,35 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "RegisterServlet", value = "/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
-    //    private String message;
-//      private EntityManagerFactory entityManagerFactory ;
-//      private EntityManager entityManager;
     private EmployeeService employeeService= new EmployeeService();
-//    public void init() {
-//        employeeService= new EmployeeService();
-//    }
-
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String userId = request.getParameter("userId");
         String fName = request.getParameter("fName");
         String sName = request.getParameter("sName");
         String userName = request.getParameter("userName");
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
         String position = request.getParameter("position");
-        String hashedPw = BCrypt.hashpw(password , BCrypt.gensalt());
-        Employee employee= new Employee(fName,sName,userName,email,hashedPw,position);
-        employeeService.addEmlpoyee(employee);
-        response.sendRedirect("login.jsp");
+        if(userId !=null){
+            Long id = Long.valueOf(userId);
+            Employee employee= new Employee(id,fName,sName,userName,email,position);
+            employeeService.updateProfile(employee);
+        }else{
+            String password = request.getParameter("password");
+            String hashedPw = BCrypt.hashpw(password , BCrypt.gensalt());
+            Employee employee= new Employee(fName,sName,userName,email,hashedPw,position);
+            boolean result =employeeService.addEmlpoyee(employee);
+            if(result){
+                request.getSession().setAttribute("errorMsg" , "The userName or Email is Already exist Or not valide");
+                response.sendRedirect("register.jsp");
+                return;
+            }
+            response.sendRedirect("login.jsp");
+        }
     }
 
     public void destroy() {

@@ -10,8 +10,7 @@ import jakarta.persistence.Query;
 import java.util.List;
 
 public class TasksRepo {
-    private final EntityManagerFactory entityManagerFactory;
-
+    private  EntityManagerFactory entityManagerFactory;
     public TasksRepo(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
     }
@@ -51,13 +50,14 @@ public class TasksRepo {
         return null;
     }
 
-    public void delete(int id) {
+    public boolean delete(int id) {
         EntityManager entityManager =entityManagerFactory.createEntityManager();
         try{
             Task task =entityManager.find(Task.class,id);
             entityManager.getTransaction().begin();
             entityManager.remove(task);
             entityManager.getTransaction().commit();
+            return true;
         }catch (Exception e){
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
@@ -66,5 +66,22 @@ public class TasksRepo {
         }finally {
             entityManager.close();
         }
+        return false;
+    }
+
+    public boolean findUserById(Long id) {
+        EntityManager entityManager =entityManagerFactory.createEntityManager();
+        try{
+            Employee emp =entityManager.find(Employee.class,id);
+            return true;
+        }catch (Exception e){
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }finally {
+            entityManager.close();
+        }
+        return false;
     }
 }

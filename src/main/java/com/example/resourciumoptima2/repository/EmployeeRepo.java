@@ -87,4 +87,20 @@ public class EmployeeRepo {
             entityManager.close();
         }
     }
+
+    public void update_Profile(Employee employee) {
+        EntityManager entityManager =entityManagerFactory.createEntityManager();
+        try{
+            entityManager.getTransaction().begin();
+            entityManager.merge(employee);
+            entityManager.getTransaction().commit();
+        }catch (Exception e){
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }finally {
+            entityManager.close();
+        }
+    }
 }

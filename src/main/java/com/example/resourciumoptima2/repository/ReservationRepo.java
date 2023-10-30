@@ -8,14 +8,18 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Query;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ReservationRepo {
 
-    private final EntityManagerFactory entityManagerFactory;
+    private  EntityManagerFactory entityManagerFactory;
 
     public ReservationRepo(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
@@ -24,15 +28,10 @@ public class ReservationRepo {
 
     public List<Reservation> getReservation() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        LocalDate localDate = LocalDate.now();
-//        LocalDateTime localDateTime = LocalDateTime.now();
-//        System.out.println(localDate);
-//        System.out.println(localDateTime);
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date =new Date();
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select e from Reservation e", Reservation.class);
-//            query.setParameter("localDateTime" , localDateTime);
             List<Reservation> reservation = query.getResultList();
             entityManager.getTransaction().commit();
             return reservation;
@@ -109,7 +108,6 @@ public class ReservationRepo {
         EntityManager entityManager =entityManagerFactory.createEntityManager();
         try {
             entityManager.getTransaction().begin();
-//            Reservation res = entityManager.find(Reservation.class ,reservation1.getId());
             entityManager.merge(reservation1);
             entityManager.getTransaction().commit();
         } catch (Exception e) {

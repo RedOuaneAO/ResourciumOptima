@@ -12,17 +12,20 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "ReservationServlet", value = "/ReservationServlet")
 public class ReservationServlet extends HttpServlet {
     private ReservationService reservation = new ReservationService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        reservationList.stream().peek(reservation1 -> reservation1.setEndDate());
         String resrvationId = request.getParameter("id");
-        Object equipementList = reservation.getAllReservation();
+        Object equipementList = reservation.getAllEquipment();
         request.getSession().setAttribute("Equipments" , equipementList);
         if(resrvationId !=null){
             int id = Integer.parseInt(resrvationId);
@@ -49,7 +52,7 @@ public class ReservationServlet extends HttpServlet {
             String returnDate =request.getParameter("returnDate");
             String equipmentId = request.getParameter("equipment");
             Long resId = Long.valueOf(request.getParameter("resId"));
-            System.out.println("first data : " + reservDate + " " + returnDate + " " + equipmentId);
+//            System.out.println("first data : " + reservDate + " " + returnDate + " " + equipmentId);
             SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyy-MM-dd");
             HttpSession session = request.getSession();
             String userName = (String) session.getAttribute("userName");

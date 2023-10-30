@@ -1,6 +1,7 @@
 <%@ page import="com.example.resourciumoptima2.entity.Task" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="com.example.resourciumoptima2.entity.Employee" %>
 <% if (session.getAttribute("userName") ==null){
   response.sendRedirect("login.jsp");
 }%>
@@ -27,10 +28,15 @@
           </div>
         </div>
         <ul class="nav flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
-          <li class="nav-item">
-            <a href="dash.jsp" class="nav-link px-0 text-white">
-              <i class="bi bi-house"></i>
-              <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+          <li>
+            <a href="EquipmentServlet" class="nav-link px-0 text-white">
+              <i class="bi bi-nut"></i>
+              <span class="ms-1 d-none d-sm-inline">Equipment</span></a>
+          </li>
+          <li>
+            <a href="ReservationServlet" class="nav-link px-0 text-white">
+              <i class="bi bi-speedometer2"></i>
+              <span class="ms-1 d-none d-sm-inline">Reservation</span>
             </a>
           </li>
           <li>
@@ -40,27 +46,16 @@
             </a>
           </li>
           <li>
-            <a href="DepartmentServlet" class="nav-link px-0 text-white">
-              <i class="bi bi-house-door"></i>
-              <span class="ms-1 d-none d-sm-inline">Department</span>
-            </a>
-          </li>
-          <li>
-            <a href="ReservationServlet" class="nav-link px-0 text-white">
-              <i class="bi bi-speedometer2"></i>
-              <span class="ms-1 d-none d-sm-inline">Reservation</span>
-            </a>
-          </li>
-          <li>
             <a href="TasksServlet" class="nav-link px-0 text-white">
               <i class="bi bi-list-task"></i>
               <span class="ms-1 d-none d-sm-inline">Tasks</span>
             </a>
           </li>
           <li>
-            <a href="EquipmentServlet" class="nav-link px-0 text-white">
-              <i class="bi bi-nut"></i>
-              <span class="ms-1 d-none d-sm-inline">Equipment</span></a>
+            <a href="DepartmentServlet" class="nav-link px-0 text-white">
+              <i class="bi bi-house-door"></i>
+              <span class="ms-1 d-none d-sm-inline">Department</span>
+            </a>
           </li>
           <li>
             <a href="EmployeesServlet?userName=${ sessionScope.userName }" class="nav-link px-0 text-white">
@@ -101,6 +96,11 @@
               </button>
             </div>
             <div class="row">
+              <% if(session.getAttribute("Msg") != null){%>
+              <div class="alert alert-success" role="alert">
+                <p><strong>!!Successfuly</strong> ${sessionScope.Msg}</p>
+              </div>
+              <%}%>
               <div class=" d-flex justify-content-center ">
                 <div class="card shadow mb-4 col-8">
                   <%--                  Card Header - Dropdown ----%>
@@ -117,7 +117,7 @@
                           <th scope="col">description</th>
                           <th scope="col">limitDate</th>
                           <th scope="col">priority</th>
-                          <th scope="col">To</th>
+                          <th scope="col">Assigned To</th>
                           <th scope="col">status</th>
                           <th scope="col">Action</th>
                         </tr>
@@ -133,7 +133,7 @@
                           <td><p><%= task.getDescription() %></p></td>
                           <td><p><%= dateFormat.format(task.getLimitDate())%></p></td>
                           <td><p><%= task.getPriority() %></p></td>
-                          <td><p><%= task.getEmployee() %></p></td>
+                          <td><p><%= task.getEmployee().getUserName() %></p></td>
                           <td><p><%= task.getStatus() %></p></td>
                           <td>
                             <a href="TasksServlet?id=<%=task.getId()%>" class="btn btn-danger"> Delete</a>
@@ -178,10 +178,28 @@
             </div>
             <div class="mb-4">
               <label class="form-label">Priority</label>
-              <select class="form-select" name="priority">
+              <select class="form-select" name="priority" required>
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Status</label>
+              <select class="form-select" name="status" required>
+                <option value="To Do">To Do</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Done">Done</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Assigned To </label>
+              <select class="form-select" name="AssignTo" required>
+                <option disabled selected>Select</option>
+                <% List<Employee> employees= (List<Employee>) request.getSession().getAttribute("employees");
+                  for (Employee emp :employees) { %>
+                <option value="<%=emp.getId()%>"><%=emp.getUserName()%></option>
+                <% }%>
               </select>
             </div>
 <%--            <button type="submit" class="btn btn-primary">Add</button>--%>

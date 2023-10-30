@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("login.jsp");
         }else {
             session.setAttribute("userName", userName);
-            response.sendRedirect("dash.jsp");
+            response.sendRedirect("EquipmentServlet");
         }
         }
     }

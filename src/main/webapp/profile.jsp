@@ -26,10 +26,15 @@
                     </div>
                 </div>
                 <ul class="nav flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
-                    <li class="nav-item">
-                        <a href="dash.jsp" class="nav-link px-0 text-white">
-                            <i class="bi bi-house"></i>
-                            <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                    <li>
+                        <a href="EquipmentServlet" class="nav-link px-0 text-white">
+                            <i class="bi bi-nut"></i>
+                            <span class="ms-1 d-none d-sm-inline">Equipment</span></a>
+                    </li>
+                    <li>
+                        <a href="ReservationServlet" class="nav-link px-0 text-white">
+                            <i class="bi bi-speedometer2"></i>
+                            <span class="ms-1 d-none d-sm-inline">Reservation</span>
                         </a>
                     </li>
                     <li>
@@ -39,27 +44,16 @@
                         </a>
                     </li>
                     <li>
-                        <a href="DepartmentServlet" class="nav-link px-0 text-white">
-                            <i class="bi bi-house-door"></i>
-                            <span class="ms-1 d-none d-sm-inline">Department</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="ReservationServlet" class="nav-link px-0 text-white">
-                            <i class="bi bi-speedometer2"></i>
-                            <span class="ms-1 d-none d-sm-inline">Reservation</span>
-                        </a>
-                    </li>
-                    <li>
                         <a href="TasksServlet" class="nav-link px-0 text-white">
                             <i class="bi bi-list-task"></i>
                             <span class="ms-1 d-none d-sm-inline">Tasks</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-0 text-white">
-                            <i class="bi bi-nut"></i>
-                            <span class="ms-1 d-none d-sm-inline">Equipment</span></a>
+                        <a href="DepartmentServlet" class="nav-link px-0 text-white">
+                            <i class="bi bi-house-door"></i>
+                            <span class="ms-1 d-none d-sm-inline">Department</span>
+                        </a>
                     </li>
                     <li>
                         <a href="EmployeesServlet?userName=${ sessionScope.userName }" class="nav-link px-0 text-white">
@@ -79,7 +73,7 @@
                 <div class="col mt-3 py-3" style="height: 100vh">
                     <div class="container shadow rounded bg-white border">
                         <h5 class="fw-bold mt-3 ms-3">Profile</h5>
-                        <form action="" method="POST">
+                        <form action="RegisterServlet" method="POST">
                             <div class="d-md-flex justify-content-evenly my-5">
                                 <div class="col-md-5 shadow border rounded">
                                     <div class="p-3 pt-5">
@@ -92,16 +86,17 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>User name</label>
-                                                <input type="text" name="name" class="form-control" value="<%=EmployeeData.getUserName()%>">
+                                                <input type="text" name="userName" class="form-control" disabled value="<%=EmployeeData.getUserName()%>">
+                                                <input type="text" name="userId" class="form-control" value="<%=EmployeeData.getId()%>" hidden>
                                             </div>
                                             <div class="col-md-6">
                                                 <label>Position</label>
-                                                <input type="text" name="position" class="form-control" value="<%=EmployeeData.getPosition()%>">
+                                                <input type="text" name="position" class="form-control" disabled value="<%=EmployeeData.getPosition()%>">
                                             </div>
                                         </div><br>
                                         <div class="row">
-                                            <div class="col-md-6"><label>First Name</label><input type="text" name="firstNAme" class="form-control" value="<%=EmployeeData.getFirstName()%>"></div>
-                                            <div class="col-md-6"><label>Last Name</label><input type="text"  name="lastName"  class="form-control" value="<%=EmployeeData.getLastName()%>"/></div>
+                                            <div class="col-md-6"><label>First Name</label><input type="text" name="fName" class="form-control" value="<%=EmployeeData.getFirstName()%>"></div>
+                                            <div class="col-md-6"><label>Last Name</label><input type="text"  name="sName"  class="form-control" value="<%=EmployeeData.getLastName()%>"/></div>
                                         </div><br>
                                         <div class="col-md-12"><label>Email</label><input type="email" name="email" class="form-control" value="<%=EmployeeData.getEmail()%>"></div>
                                     </div>
