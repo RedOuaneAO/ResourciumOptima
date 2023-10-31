@@ -17,7 +17,6 @@ public class RegisterServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userId = request.getParameter("userId");
@@ -26,10 +25,28 @@ public class RegisterServlet extends HttpServlet {
         String userName = request.getParameter("userName");
         String email = request.getParameter("email");
         String position = request.getParameter("position");
-        if(userId !=null){
-            Long id = Long.valueOf(userId);
-            Employee employee= new Employee(id,fName,sName,userName,email,position);
-            employeeService.updateProfile(employee);
+        String newPass= request.getParameter("newPass");
+        String confirm_pass =request.getParameter("confirm_pass");
+        if(newPass !=null && newPass.equals(confirm_pass)){
+                String hashedPw = BCrypt.hashpw(confirm_pass , BCrypt.gensalt());
+                Long id = Long.valueOf(userId);
+                Employee employee = employeeService.getEmpById(id);
+                employee.setPassword(hashedPw);
+                employee.setId(id);
+                employeeService.updateProfile(employee);
+                response.sendRedirect("EquipmentServlet");
+                return;
+        }else if(userId !=null){
+                Long id = Long.valueOf(userId);
+                Employee employee = employeeService.getEmpById(id);
+                employee.setEmail(email);
+                employee.setPosition(position);
+                employee.setFirstName(fName);
+                employee.setLastName(sName);
+                employee.setUserName(userName);
+                employeeService.updateProfile(employee);
+                response.sendRedirect("EquipmentServlet");
+                return;
         }else{
             String password = request.getParameter("password");
             String hashedPw = BCrypt.hashpw(password , BCrypt.gensalt());

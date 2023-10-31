@@ -15,12 +15,12 @@ public class EmployeesServlet extends HttpServlet {
     private EmployeeService employeeService= new EmployeeService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String authUserName = request.getParameter("userName");
         if(authUserName != null){
             Employee employee = new Employee(authUserName);
             Employee userData =(Employee) employeeService.userLogin(employee);
-            request.setAttribute("employeeData" , userData);
+            request.getSession().setAttribute("employeeData" , userData);
+//            request.setAttribute("employeeData" , userData);
             RequestDispatcher requestDispatcher= request.getRequestDispatcher("profile.jsp");
             requestDispatcher.forward(request,response);
         }else {

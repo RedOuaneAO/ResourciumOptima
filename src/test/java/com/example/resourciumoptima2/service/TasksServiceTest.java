@@ -41,6 +41,7 @@ class TasksServiceTest {
         tasksService.addTask(task);
         int after = tasksService.getAllTasks().size();
         assertFalse((before+1) == after);
+        tasksService.deleteTask(Math.toIntExact(task.getId()));
     }
 //    testing the date shouldn't be before the current date
     @Test

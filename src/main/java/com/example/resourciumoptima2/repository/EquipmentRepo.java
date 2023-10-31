@@ -32,7 +32,6 @@ public class EquipmentRepo {
         } finally {
             entityManager.close();
         }
-        
     }
     public List<Equipement> getAllEquipment() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();

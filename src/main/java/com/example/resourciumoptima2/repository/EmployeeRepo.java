@@ -103,4 +103,9 @@ public class EmployeeRepo {
             entityManager.close();
         }
     }
+    public  Employee findById(Long id){
+        EntityManager entityManager =entityManagerFactory.createEntityManager();
+        Employee employee= entityManager.find(Employee.class , id);
+        return employee;
+    }
 }

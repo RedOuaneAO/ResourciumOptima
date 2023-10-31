@@ -80,18 +80,18 @@
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <h4 class="text-right">Profile Settings</h4>
                                         </div>
-                                    <% if (request.getAttribute("employeeData") != null) {
-                                        Employee EmployeeData = (Employee) request.getAttribute("employeeData");
+                                    <% if (session.getAttribute("employeeData") != null) {
+                                        Employee EmployeeData = (Employee) session.getAttribute("employeeData");
                                     %>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>User name</label>
-                                                <input type="text" name="userName" class="form-control" disabled value="<%=EmployeeData.getUserName()%>">
+                                                <input type="text" name="userName" class="form-control"  value="<%=EmployeeData.getUserName()%>">
                                                 <input type="text" name="userId" class="form-control" value="<%=EmployeeData.getId()%>" hidden>
                                             </div>
                                             <div class="col-md-6">
                                                 <label>Position</label>
-                                                <input type="text" name="position" class="form-control" disabled value="<%=EmployeeData.getPosition()%>">
+                                                <input type="text" name="position" class="form-control"  value="<%=EmployeeData.getPosition()%>">
                                             </div>
                                         </div><br>
                                         <div class="row">
@@ -111,14 +111,18 @@
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h4 class="text-right">Password Update</h4>
                             </div>
-                            <form action="" method="POST">
-                                <div class="col-md-12">
-                                    <label>Old Password</label>
-                                    <input type="password" class="form-control" name="old_password">
-                                </div> <br>
+                            <% if (session.getAttribute("employeeData") != null) {
+                                Employee EmployeeData = (Employee) session.getAttribute("employeeData");
+                            %>
+                            <form action="RegisterServlet" method="POST">
+<%--                                <div class="col-md-12">--%>
+<%--                                    <label>Old Password</label>--%>
+<%--                                    <input type="password" class="form-control" name="old_password">--%>
+<%--                                </div> <br>--%>
+                                <input type="text" name="userId" class="form-control" value="<%=EmployeeData.getId()%>" hidden>
                                 <div class="col-md-12">
                                     <label>New Password</label>
-                                    <input type="password" class="form-control" name="password">
+                                    <input type="password" class="form-control" name="newPass">
                                 </div> <br>
                                 <div class="col-md-12">
                                     <label>Confirm Password</label>
@@ -128,6 +132,7 @@
                                     <button class="btn btn-outline-primary" type="submit">Save Changes</button>
                                 </div>
                             </form>
+                            <%}%>
                         </div>
                     </div>
                 </div>

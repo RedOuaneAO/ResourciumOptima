@@ -8,8 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EquipmentServiceTest {
 
+    static EquipmentService equipmentService;
     @BeforeAll
-    void setUp() {
+    static void setUp() {
+        equipmentService =new EquipmentService();
     }
 
     @Test

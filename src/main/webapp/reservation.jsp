@@ -130,10 +130,10 @@
                                                     <td><p><%=dateFormat.format(res.getEndDate())%></p></td>
                                                     <td>
                                                         <div class="d-flex justify-content-evenly">
-                                                            <a href="ReservationServlet?id=<%=res.getId()%>" class="btn btn-danger my-2"> Delete</a>
+                                                            <a href="ReservationServlet?id=<%=res.getId()%>" class="btn btn-danger"> Delete</a>
                                                             <form action="ReservationServlet" method="post">
                                                                 <input type="text" value="<%=res.getId()%>" name="id" hidden>
-                                                                <button type="submit" class="btn btn-success my-1">Update</button>
+                                                                <button type="submit" class="btn btn-success ">Update</button>
                                                             </form>
                                                         </div>
                                                     </td>

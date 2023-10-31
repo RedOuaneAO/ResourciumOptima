@@ -54,4 +54,8 @@ public class EmployeeService {
             String regex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
             return email.matches(regex);
     }
+
+    public Employee getEmpById(Long id) {
+        return employeeRepo.findById(id);
+    }
 }

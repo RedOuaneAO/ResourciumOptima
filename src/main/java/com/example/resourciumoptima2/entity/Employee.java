@@ -35,7 +35,7 @@ public class Employee {
         this.position = position;
     }
 
-    public Employee(Long id, String firstName, String lastName, String userName, String email ,String position) {
+    public Employee(Long id, String firstName, String lastName, String email ,String position) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
